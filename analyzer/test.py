@@ -1,8 +1,8 @@
 '''from model import Model
 from computer_vision import Computer_vision'''
 
-from .model import Model
-from .computer_vision import ComputerVision
+from analyzer.cnn_model import Model
+from analyzer.computer_vision import ComputerVision
 
 categorical_model = Model(is_categorical=True)
 binary_model = Model(is_categorical=False)

@@ -56,7 +56,8 @@ class ComputerVision():
 
             # Combine nearby nucleus
             # https://stackoverflow.com/questions/50432349/combine-contours-vertically-and-get-convex-hull-opencv-python
-            rect_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (15, 15))
+            rect_kernel = cv2.getStructuringElement(
+                cv2.MORPH_ELLIPSE, (15, 15))
             threshed = cv2.morphologyEx(median, cv2.MORPH_CLOSE, rect_kernel)
 
             # Clean small dirt on image
