@@ -1,6 +1,7 @@
-from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Lambda, Dense, Dropout, Activation, Flatten
 import numpy as np
+from keras.models import Sequential
+from keras.layers import Conv2D, MaxPooling2D, Lambda, Dense, Dropout,\
+    Activation, Flatten
 
 
 class Model():
@@ -14,10 +15,10 @@ class Model():
         self.is_categorical = is_categorical
         if self.is_categorical:
             self.model = self.lanet_model_categotical()
-            self.model.load_weights('presentation/weights/LaNet-categorical.hdf5')
+            self.model.load_weights('/weights/LaNet-categorical.hdf5')
         else:
             self.model = self.lanet_model_binary()
-            self.model.load_weights('presentation/weights/LaNet-binary.hdf5')
+            self.model.load_weights('/weights/LaNet-binary.hdf5')
 
     def summary(self):
         return self.model.summary()
@@ -89,5 +90,6 @@ class Model():
             prediction = np.argmax(prediction, axis=1)
         else:
             classes = ['mono', 'poly']
-            prediction = np.rint(prediction.reshape(1, len(images)))[0].astype(int)
+            prediction = np.rint(prediction.reshape(1, len(images)))[
+                0].astype(int)
         return [classes[i] for i in prediction]

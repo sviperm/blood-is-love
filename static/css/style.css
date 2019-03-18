@@ -1,0 +1,41 @@
+.custom-file-input {
+  cursor: pointer;
+}
+#custom_file .custom-file-label::after {
+  content: "Выбрать";
+    color: white;
+    background-color: #17a2b8;
+    border-bottom-width: initial;
+    height: 40px;
+}
+
+/* #custom_file .custom-file-label.selected::after {
+  content: "Выбрать другой";
+} */
+
+#custom_file .custom-file-label::before {
+  content: "Файл не выбран";
+  cursor: none;
+}
+
+/*when a value is selected, this class removes the content */
+.custom-file-label.selected::before {
+  content: "" !important;
+  cursor: none;
+}
+
+.custom-file {
+  overflow: hidden !important;
+}
+.custom-file-label {
+  white-space: nowrap !important;
+}
+
+.card {
+  border-width: thin;
+  border-color: #17a2b8;
+  cursor: default;
+}
+tbody tr:hover{
+  background-color: #24bdd5;
+}
