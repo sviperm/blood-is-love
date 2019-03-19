@@ -38,10 +38,10 @@ def upload_file(request):
             image_src = codecs.decode(base64_data, 'ascii')
             # # Аутпут изображения
             return render(request,
-                          template_name='analyzer/upload.html',
+                          template_name='analyzer/analyzer.html',
                           context={'form': form,
                                    'image_src': image_src,
                                    'file_name': form.files['file'].name})
     return render(request,
-                  template_name='analyzer/upload.html',
+                  template_name='analyzer/analyzer.html',
                   context={'form': form})

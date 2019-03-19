@@ -20,7 +20,7 @@
 
 /*when a value is selected, this class removes the content */
 .custom-file-label.selected::before {
-  content: "" !important;
+  content: "Удерживайте курсор\n" !important;
   cursor: none;
 }
 
@@ -38,4 +38,8 @@
 }
 tbody tr:hover{
   background-color: #24bdd5;
+}
+
+.plc-1 {
+  padding-left: .30rem!important;
 }
