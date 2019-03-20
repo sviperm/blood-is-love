@@ -14,13 +14,13 @@
 } */
 
 #custom_file .custom-file-label::before {
-  content: "Файл не выбран";
+  content: "Файлы не выбраны";
   cursor: none;
 }
 
 /*when a value is selected, this class removes the content */
 .custom-file-label.selected::before {
-  content: "Удерживайте курсор\n" !important;
+  content: "Файлы выбраны" !important;
   cursor: none;
 }
 

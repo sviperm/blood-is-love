@@ -1,19 +1,16 @@
-import base64
-import codecs
-import urllib
-from io import BytesIO
-
-import cv2
-import numpy as np
 from django.http import HttpResponse
 from django.shortcuts import render
+import base64
+import codecs
 from PIL import Image
+import urllib
+from io import BytesIO
+import cv2
+import numpy as np
 
 from analyzer.forms import UploadFileForm
 
 from .tests import image_to_html
-
-# Create your views here.
 
 
 def upload_file(request):

@@ -1,4 +1,5 @@
 $('.custom-file-input').on('change', function () {
-    var fileName = document.getElementById("id_file").files[0].name;
-    $(this).next('.form-control-file').addClass("selected").html(fileName);
+    // var fileName = document.getElementById("id_file").files[0].name;
+    $(this).next('.form-control-file').addClass("selected");
+    // $(this).next('.form-control-file').addClass("selected").html(fileName);
 })
