@@ -10,8 +10,6 @@ import numpy as np
 
 from analyzer.forms import UploadFileForm
 
-from .tests import image_to_html
-
 
 def home(request):
     return HttpResponse('Home')
