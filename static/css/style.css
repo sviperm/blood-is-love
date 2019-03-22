@@ -3,10 +3,10 @@
 }
 #custom_file .custom-file-label::after {
   content: "Выбрать";
-    color: white;
-    background-color: #17a2b8;
-    border-bottom-width: initial;
-    height: 40px;
+  color: white;
+  background-color: #17a2b8;
+  border-bottom-width: initial;
+  height: 40px;
 }
 
 /* #custom_file .custom-file-label.selected::after {
@@ -29,6 +29,29 @@
 }
 .custom-file-label {
   white-space: nowrap !important;
+}
+
+.scrollspy {
+  position: relative;
+  height: 500px;
+  margin-top: .5rem;
+  overflow: auto;
+  border-color: #17a2b8;
+  border-radius: calc(.25rem - 1px);
+}
+
+.scroll-img {
+  width: 100%;
+  border-radius: calc(.25rem - 1px);
+}
+
+a.list-group-item.active { 
+  background-color: #17a2b8 !important; 
+  border-color: #17a2b8;
+}
+
+a.list-group-item:hover { 
+  background-color: #edf8fa; 
 }
 
 .card {
