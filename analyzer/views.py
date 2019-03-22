@@ -13,7 +13,11 @@ from analyzer.forms import UploadFileForm
 from .tests import image_to_html
 
 
-def upload_file(request):
+def home(request):
+    return HttpResponse('Home')
+
+
+def analyzer(request):
     form = UploadFileForm()
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
@@ -42,3 +46,15 @@ def upload_file(request):
     return render(request,
                   template_name='analyzer/analyzer.html',
                   context={'form': form})
+
+
+def upload(request):
+    return HttpResponse('Upload')
+
+
+def data(request):
+    return HttpResponse('data')
+
+
+def about(request):
+    return HttpResponse('about')
