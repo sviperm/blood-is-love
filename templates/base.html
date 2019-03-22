@@ -38,19 +38,25 @@
                 <div class="navbar-collapse collapse" id="navbar9">
                     <ul class="navbar-nav ml-auto plc-1">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Анализатор</a>
+                            <a class="nav-link {% block analyzer-active %}{% endblock analyzer-active %}"
+                                href="{% url 'analyzer:analyzer' %}">Анализатор</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Загрузить</a>
+                            <a class="nav-link {% block upload-active %}{% endblock upload-active %}"" href="
+                                {% url 'analyzer:upload' %}">Загрузить</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">База данных</a>
+                            <a class="nav-link {% block data-active %}{% endblock data-active %}"" href="
+                                {% url 'analyzer:data' %}">База данных</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">О проекте</a>
+                            <a class="nav-link {% block about-active %}{% endblock about-active %}"" href="
+                                {% url 'analyzer:about' %}">О проекте</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Вход / Регистрация</a>
+                            <a class="nav-link {% block login-active %}{% endblock login-active %}"" href=" /admin/login">Вход /
+                                Регистрация</a> {% comment %} <!-- <a class="nav-link"
+                                href="{% url custom_auth:login %}">Вход / Регистрация</a> --> {% endcomment %}
                         </li>
                     </ul>
                 </div>
