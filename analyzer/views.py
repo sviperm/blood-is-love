@@ -24,13 +24,16 @@ def analyzer(request):
         user = request.user
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
+            images = []
             for file in request.FILES.getlist('file'):
                 # TODO: сделать проверку на уже имеющееся фотографии
                 # Сохранение фотографий
-                image = Image.objects.create(file=file)
+                image = Image.objects.create(
+                    user=request.user, title='Test', file=file)
                 # # Инпут изображения
                 # img = Image.open(
-                #       C:\\Users\\sviperm\\Documents\\blood-of-vlad\\analyzer\\test-img-2.png')
+                # 'C: \\Users\\sviperm\\Documents\\blood-of-vlad\\analyzer\\\
+                #         test-img-2.png')
                 # # Конвертация изображения в массив
                 # img = np.asarray(img)
                 # # Вся магия тут
@@ -39,18 +42,18 @@ def analyzer(request):
                 # img_bytes = BytesIO()
                 # img.save(img_bytes, format='PNG')
                 # base64_data = codecs.encode(img_bytes.getvalue(), 'base64')
-                # image_src = codecs.decode(base64_data, 'ascii')
-                # # Аутпут изображения
+                images.append(image.get_cover_base64())
+                # Удаление из бд и директории
+                image.delete()
+                # Аутпут изображения
             return render(request,
                           template_name='analyzer/analyzer.html',
                           context={'form': form,
-                                   #    'image_src': image_src,
-                                   #    'file_name': form.files['file'].name
+                                   'images': images,
                                    })
     return render(request,
                   template_name='analyzer/analyzer.html',
-                  context={'input': True,
-                           'form': form})
+                  context={'form': form, })
 
 
 def upload(request):

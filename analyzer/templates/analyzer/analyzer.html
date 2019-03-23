@@ -8,9 +8,10 @@
 
 {% block analyzer-active %}active{% endblock analyzer-active %}
 
-<!-- Content insude container -->
 {% block content %}
-{% if input %}
+
+{% if not images %}
+
 <!-- Files input -->
 <div class="row justify-content-around">
     <div class="file-input col m-2 mt-4 mb-4 p-0">
@@ -29,27 +30,38 @@
         </form>
     </div>
 </div>
+
 {% endif %}
 
 <!-- Files preview -->
-<div id="preview_block" class="row justify-content-between d-none">
+<div id="preview_block" class="row justify-content-between {% if not images %}d-none{% endif %}">
+
+    {% if not images %}
+
     <div class="col-md-4 p-2">
         <div id="image_list" class="list-groups mb-4 d-none d-md-block">
         </div>
-
-        {% if input %}
         <button id="clear_list" class="btn btn-outline-danger col mb-4" type="button">Очистить</button>
-        {% endif %}
-
     </div>
+
+    {% endif %}
+
     <div id="image_holder" class="scrollspy col-md-8 mt-0 pl-2 pr-2" data-spy="scroll" data-target="#image_list"
         data-offset="1">
+
+        {% for image in images %}
+
+        <img src="{{ image }}" style="width: 100%">
+
+        {% endfor %}
+
     </div>
 </div>
+
 {% endblock content %}
 
 {% block scripts %}
-{% if input %}
+
 <script type="text/javascript" src="{% static 'js/preview.js' %}"></script>
-{% endif %}
+
 {% endblock scripts %}
