@@ -9,7 +9,8 @@ from analyzer.models import Image
 
 
 class ImageForm(forms.ModelForm):
-
+    # TODO: сделать форму вот такой
+    # <input type="file" class="custom-file-input" name="file" accept="image/*" required="" id="id_file" multiple="">
     class Meta:
         model = Image
         fields = ("file",)
