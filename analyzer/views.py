@@ -25,27 +25,17 @@ def analyzer(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             images = []
-            for file in request.FILES.getlist('file'):
+            for i, file in enumerate(request.FILES.getlist('file')):
                 # TODO: сделать проверку на уже имеющееся фотографии
-                # Сохранение фотографий
+
+                # Save image locally
                 image = Image.objects.create(
                     user=request.user, title='Test', file=file)
-                # # Инпут изображения
-                # img = Image.open(
-                # 'C: \\Users\\sviperm\\Documents\\blood-of-vlad\\analyzer\\\
-                #         test-img-2.png')
-                # # Конвертация изображения в массив
-                # img = np.asarray(img)
-                # # Вся магия тут
-                # img = Image.fromarray(img)
-                # # Конвертация массива в изображение
-                # img_bytes = BytesIO()
-                # img.save(img_bytes, format='PNG')
-                # base64_data = codecs.encode(img_bytes.getvalue(), 'base64')
-                images.append(image.get_cover_base64())
-                # Удаление из бд и директории
+                img_dict = image.analyze_image()
+                img_dict['id'] = str(i)
+                images.append(img_dict)
+                # Completely delete image
                 image.delete()
-                # Аутпут изображения
             return render(request,
                           template_name='analyzer/analyzer.html',
                           context={'form': form,

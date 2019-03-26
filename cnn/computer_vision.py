@@ -1,17 +1,9 @@
 import os
 import numpy as np
 import cv2
-# import PyQt5
 import matplotlib
-# matplotlib.use('Qt5Agg')
-
-# In[0]: %matplotlib inline
 from matplotlib import pyplot as plt
 from pprint import pprint as pp
-
-
-def get_list_of_dir(path):
-    return [f for f in os.listdir(path) if not f.startswith('.')]
 
 
 class ComputerVision():
@@ -20,13 +12,12 @@ class ComputerVision():
     # er_length = 40
 
     def __init__(self,
-                 images_dir: str,
+                 np_image,
                  eritrocyte_length: int,
                  color_lower=np.array([120, 80, 50]),
                  color_upper=np.array([175, 270, 270])):
         super(ComputerVision, self).__init__()
-        self.images_dir = images_dir
-        self.images_file_names = get_list_of_dir(images_dir)
+        self.np_image = np_image
         self.color_lower = color_lower
         self.color_upper = color_upper
         self.eritrocyte_length = eritrocyte_length
@@ -35,47 +26,42 @@ class ComputerVision():
     def detect_cells(self):
         """
         Detect cells and return images with them
-        Returning: images_list, draw_list, source_images"""
+        Returning: images_list, draw_list, source_images
+        """
         # Pick custom color via 'helpers/color_picker.py'
         # I suggest change only mid lower value
-        lower = self.color_lower
-        upper = self.color_upper
-        source_images = []
-        images_list = []
-        draw_list = []
         # Convert to HCV format, then masking (black/white image),
         # then bluring (cleaning from dirt and small detected objects)
-        for file_name in self.images_file_names:
-            image_path = os.path.join(self.images_dir, file_name)
-            img = cv2.imread(image_path)
-            img_for_paint = cv2.imread(image_path)
-            hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            mask = cv2.inRange(hsv, lower, upper)
-            median = cv2.medianBlur(mask, 7)
 
-            # Combine nearby nucleus
-            # https://stackoverflow.com/questions/50432349/combine-contours-vertically-and-get-convex-hull-opencv-python
-            rect_kernel = cv2.getStructuringElement(
-                cv2.MORPH_ELLIPSE, (15, 15))
-            threshed = cv2.morphologyEx(median, cv2.MORPH_CLOSE, rect_kernel)
+        # src_image = np.copy(self.np_image)
+        img_for_paint = np.copy(self.np_image)
 
-            # Clean small dirt on image
-            _, contours, _ = cv2.findContours(
-                threshed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-            contours = self.clean_image(contours)
+        img = cv2.cvtColor(self.np_image, cv2.COLOR_BGR2RGB)
+        hsv = cv2.cvtColor(self.np_image, cv2.COLOR_BGR2HSV)
+        mask = cv2.inRange(hsv, self.color_lower, self.color_upper)
+        median = cv2.medianBlur(mask, 7)
 
-            # Draw detected nucleus on source image
-            cv2.drawContours(image=img_for_paint, contours=contours,
-                             contourIdx=-1, color=(0, 255, 0),
-                             thickness=2, lineType=8, offset=(0, 0))
+        # Connect nearby nucleus
+        # https://stackoverflow.com/questions/50432349/combine-contours-vertically-and-get-convex-hull-opencv-python
+        rect_kernel = cv2.getStructuringElement(
+            cv2.MORPH_ELLIPSE, (15, 15))
+        threshed = cv2.morphologyEx(median, cv2.MORPH_CLOSE, rect_kernel)
 
-            # Crop source image to small one and only cell samll images
-            cropped_images = self.crop_image(img, img_for_paint, contours)
-            source_images.append(img)
-            images_list.append(cropped_images)
-            draw_list.append(img_for_paint)
-        return images_list[0], draw_list, source_images
+        # Clean small dirt on image
+        _, contours, _ = cv2.findContours(
+            threshed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours = self.clean_image(contours)
+
+        # Draw detected nucleus on source image
+        # cv2.drawContours(image=img_for_paint, contours=contours,
+        #                  contourIdx=-1, color=(0, 255, 0),
+        #                  thickness=2, lineType=8, offset=(0, 0))
+
+        # Crop source image to small ones
+        cropped_images = self.crop_image(img, img_for_paint, contours)
+
+        # return src_image, img_for_paint, cropped_images
+        return img_for_paint, cropped_images
 
     def clean_image(self, contours):
         """Returning contours without dirt (if dirt less then 2/3
@@ -118,6 +104,8 @@ class ComputerVision():
             # Draw
             cv2.rectangle(image_for_paint, (x_min, y_min),
                           (x_max, y_max), (255, 0, 0), 2)
+            cv2.putText(image_for_paint, str(i + 1), (x_min + 2, y_max - 5),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1.1, 255, thickness=3)
 
             # Cropping
             cropped_img = image_for_crop[y_min:y_max, x_min:x_max]
@@ -128,9 +116,3 @@ class ComputerVision():
 
         cropped_images = np.asarray(cropped_images)
         return cropped_images
-
-    def show_images(self, images):
-        for i in range(len(images)):
-            plt.imshow(images[i])
-            plt.axis('off')
-            plt.show()

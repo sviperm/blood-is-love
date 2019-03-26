@@ -10,11 +10,9 @@
 
 {% block content %}
 
-{% if not images %}
-
 <!-- Files input -->
 <div class="row justify-content-around">
-    <div class="file-input col m-2 mt-4 mb-4 p-0">
+    <div class="file-input col mx-2 p-0">
         <form enctype="multipart/form-data" method="POST">
             {% csrf_token %}
             <div class="input-group lg-3">
@@ -24,35 +22,59 @@
                     <span class="border-info custom-file-label form-control-file" for="id_file"></span>
                 </div>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-info" type="submit">Загрузить</button>
+                    <button id="upload_images" class="btn btn-outline-info" type="submit" disabled>Загрузить</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-{% endif %}
+<!-- Files preview/output -->
+<div id="preview_block" class="row justify-content-between mt-2 {% if not images %}d-none{% endif %}">
 
-<!-- Files preview -->
-<div id="preview_block" class="row justify-content-between {% if not images %}d-none{% endif %}">
-
-    {% if not images %}
-
-    <div class="col-md-4 p-2">
-        <div id="image_list" class="list-groups mb-4 d-none d-md-block">
+    <div class="col-lg-3 px-2">
+        <div id="image_list" class="list-groups d-none d-lg-block">
+            {% for image in images %}
+            <a class="list-group-item list-group-item-action" href="#image-{{ image.id }}">{{ image.name }}</a>
+            {% endfor %}
         </div>
-        <button id="clear_list" class="btn btn-outline-danger col mb-4" type="button">Очистить</button>
+        <button id="clear_list" class="btn btn-outline-danger col mt-2 mb-3" type="button">Очистить</button>
     </div>
 
-    {% endif %}
-
-    <div id="image_holder" class="scrollspy col-md-8 mt-0 pl-2 pr-2" data-spy="scroll" data-target="#image_list"
+    <div id="image_holder" class="scrollspy col-lg-9 mt-0 pl-2 pr-2" data-spy="scroll" data-target="#image_list"
         data-offset="1">
 
         {% for image in images %}
-
-        <img src="{{ image }}" style="width: 100%">
-
+        <h4 id="image-{{ image.id }}">{{ image.name }}</h4>
+        {% comment %} <img class="scroll-img" src="{{ image.src_image }}"> {% endcomment %}
+        <img class="scroll-img" src="{{ image.draw_image }}">
+        <!-- <table class="table table-sm bg-info text-white">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Тип</th>
+                    <th scope="col" style="text-align:center">Вероятность, %</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Нейтрофил</td>
+                    <td style="text-align:center">87</td>
+                    <td style="text-align:right">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Ошибка
+                        </button>
+                        <div class="dropdown-menu p-2">
+                            <div class="form-group">
+                                TODO: сделать форму для ошибки
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
         {% endfor %}
 
     </div>

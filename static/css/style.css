@@ -31,17 +31,28 @@
   white-space: nowrap !important;
 }
 
+.affix {
+  top: 20px;
+  z-index: 9999 !important;
+}
+
 .scrollspy {
   position: relative;
-  height: 500px;
-  margin-top: .5rem;
+  height: calc(100vh - 71px - 16px - 38px - 8px);
   overflow: auto;
   border-color: #17a2b8;
   border-radius: calc(.25rem - 1px);
 }
 
+@media (max-width: 991px){
+  .scrollspy {
+    height: calc(100vh - 71px - 16px - 38px - 8px - 62px);
+  }
+}
+
 .scroll-img {
   width: 100%;
+  /* height: 100%; */
   border-radius: calc(.25rem - 1px);
 }
 
@@ -54,11 +65,16 @@ a.list-group-item:hover {
   background-color: #edf8fa; 
 }
 
-.card {
+th {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+/* .card {
   border-width: thin;
   border-color: #17a2b8;
   cursor: default;
-}
+} */
 tbody tr:hover{
   background-color: #24bdd5;
 }
