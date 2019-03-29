@@ -1,9 +1,6 @@
 import os
 import numpy as np
 import cv2
-import matplotlib
-from matplotlib import pyplot as plt
-from pprint import pprint as pp
 
 
 class ComputerVision():
