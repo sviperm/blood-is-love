@@ -41,14 +41,12 @@ def computer_vision(image_path):
     image = pil_img.open(image_path)
     # Image to array
     image = np.asarray(image)
-    # Magic
-    # src_image, draw_image, cropped_images = ComputerVision(
+    # Detect cells
     draw_image, cropped_images = ComputerVision(
         np_image=image, eritrocyte_length=70).detect_cells()
-    # tests = [np_image_to_base64(image, 'png') for image in cropped_images]
+    # Classify cells
     predictions = cnn_model(is_categorical=False).predict(cropped_images)
     return {'name': image_path.name,
             'draw_image': np_image_to_base64(draw_image, format),
             'predictions': predictions,
-            # 'tests': tests,
             }

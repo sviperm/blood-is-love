@@ -17,7 +17,8 @@ class Model():
         self.is_categorical = is_categorical
         if self.is_categorical:
             self.model = self.lanet_model_categotical()
-            self.model.load_weights('/weights/LaNet-categorical.hdf5')
+            self.model.load_weights(
+                Path(settings.BASE_DIR) / 'static' / 'weights' / 'LaNet-categorical.hdf5')
         else:
             self.model = self.lanet_model_binary()
             self.model.load_weights(

@@ -50,9 +50,9 @@ class ComputerVision():
         contours = self.clean_image(contours)
 
         # Draw detected nucleus on source image
-        cv2.drawContours(image=img_for_paint, contours=contours,
-                         contourIdx=-1, color=(0, 255, 0),
-                         thickness=2, lineType=8, offset=(0, 0))
+        # cv2.drawContours(image=img_for_paint, contours=contours,
+        #                  contourIdx=-1, color=(0, 255, 0),
+        #                  thickness=2, lineType=8, offset=(0, 0))
 
         # Crop source image to small ones
         cropped_images = self.crop_image(src_img, img_for_paint, contours)
