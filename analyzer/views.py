@@ -27,12 +27,11 @@ def analyzer(request):
             images = []
             for i, file in enumerate(request.FILES.getlist('file')):
                 # TODO: сделать проверку на уже имеющееся фотографии
-
                 # Save image locally
                 image = Image.objects.create(
                     user=request.user, title='Test', file=file)
                 img_dict = image.analyze_image()
-                img_dict['id'] = str(i)
+                img_dict['id'] = i
                 images.append(img_dict)
                 # Completely delete image
                 image.delete()

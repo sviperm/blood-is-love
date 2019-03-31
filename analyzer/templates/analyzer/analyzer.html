@@ -48,21 +48,25 @@
         <h4 id="image-{{ image.id }}">{{ image.name }}</h4>
         {% comment %} <img class="scroll-img" src="{{ image.src_image }}"> {% endcomment %}
         <img class="scroll-img" src="{{ image.draw_image }}">
-        <!-- <table class="table table-sm bg-info text-white">
+        <table class="table bg-info text-white">
             <thead>
                 <tr>
                     <th scope="col"></th>
                     <th scope="col">Тип</th>
-                    <th scope="col" style="text-align:center">Вероятность, %</th>
+                    <th scope="col">Вероятность, %</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
+                {% for prediction in image.predictions %}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Нейтрофил</td>
-                    <td style="text-align:center">87</td>
-                    <td style="text-align:right">
+
+
+                    <th scope="row"> {{ prediction.count }}</th>
+                    <td>{{ prediction.result }}</td>
+
+                    <td>{{ prediction.percentage}}</td>
+                    <td>
                         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Ошибка
                         </button>
@@ -73,9 +77,17 @@
                         </div>
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
-        </table> -->
+        </table>
+        {% comment %} {% for t in image.tests %}
+        <img class="scroll-img" src="{{ t }}">
+        {% endfor %} {% endcomment %}
+
         {% endfor %}
+
+
+
 
     </div>
 </div>

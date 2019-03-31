@@ -65,16 +65,11 @@ a.list-group-item:hover {
   background-color: #edf8fa; 
 }
 
-th {
+/* th {
   text-align: center !important;
   vertical-align: middle !important;
-}
-
-/* .card {
-  border-width: thin;
-  border-color: #17a2b8;
-  cursor: default;
 } */
+
 tbody tr:hover{
   background-color: #24bdd5;
 }

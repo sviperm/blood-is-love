@@ -2,6 +2,8 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Lambda, Dense, Dropout,\
     Activation, Flatten
+from django.conf import settings
+from pathlib import Path
 
 
 class Model():
@@ -18,7 +20,8 @@ class Model():
             self.model.load_weights('/weights/LaNet-categorical.hdf5')
         else:
             self.model = self.lanet_model_binary()
-            self.model.load_weights('/weights/LaNet-binary.hdf5')
+            self.model.load_weights(
+                Path(settings.BASE_DIR) / 'static' / 'weights' / 'LaNet-binary.hdf5')
 
     def summary(self):
         return self.model.summary()
@@ -85,6 +88,7 @@ class Model():
 
     def predict(self, images):
         prediction = self.model.predict(images)
+        percentage = self.model.predict_proba(images, batch_size=32, verbose=0)
         if self.is_categorical:
             classes = ['baso', 'eosi', 'lymp', 'mono', 'neut']
             prediction = np.argmax(prediction, axis=1)
@@ -92,4 +96,17 @@ class Model():
             classes = ['mono', 'poly']
             prediction = np.rint(prediction.reshape(1, len(images)))[
                 0].astype(int)
-        return [classes[i] for i in prediction]
+        result = []
+        for count, i in enumerate(prediction):
+            dictionary = {
+                'count': count + 1,
+                'result': classes[i],
+            }
+            if i == 0:
+                percent = 1 - percentage[count]
+            elif i == 1:
+                percent = percentage[count]
+            dictionary['percentage'] = "%.2f".replace(
+                '[', '').replace(']', '') % (percent * 100)
+            result.append(dictionary)
+        return result

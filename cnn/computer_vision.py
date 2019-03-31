@@ -30,10 +30,10 @@ class ComputerVision():
         # Convert to HCV format, then masking (black/white image),
         # then bluring (cleaning from dirt and small detected objects)
 
-        # src_image = np.copy(self.np_image)
+        src_img = np.copy(self.np_image)
         img_for_paint = np.copy(self.np_image)
 
-        img = cv2.cvtColor(self.np_image, cv2.COLOR_BGR2RGB)
+        # img = cv2.cvtColor(self.np_image, cv2.COLOR_BGR2RGB)
         hsv = cv2.cvtColor(self.np_image, cv2.COLOR_BGR2HSV)
         mask = cv2.inRange(hsv, self.color_lower, self.color_upper)
         median = cv2.medianBlur(mask, 7)
@@ -50,12 +50,12 @@ class ComputerVision():
         contours = self.clean_image(contours)
 
         # Draw detected nucleus on source image
-        # cv2.drawContours(image=img_for_paint, contours=contours,
-        #                  contourIdx=-1, color=(0, 255, 0),
-        #                  thickness=2, lineType=8, offset=(0, 0))
+        cv2.drawContours(image=img_for_paint, contours=contours,
+                         contourIdx=-1, color=(0, 255, 0),
+                         thickness=2, lineType=8, offset=(0, 0))
 
         # Crop source image to small ones
-        cropped_images = self.crop_image(img, img_for_paint, contours)
+        cropped_images = self.crop_image(src_img, img_for_paint, contours)
 
         # return src_image, img_for_paint, cropped_images
         return img_for_paint, cropped_images
@@ -84,7 +84,7 @@ class ComputerVision():
             x_max = tuple(c[c[:, :, 0].argmax()][0])[0]
             y_max = tuple(c[c[:, :, 1].argmax()][0])[1]
 
-            # x/y delta for cropping full cel, not just only nucleus
+            # x/y delta for cropping full cell, not just only nucleus
             crop_size = 3 * self.eritrocyte_length
             x_delta = int(x_max - x_min)
             y_delta = int(y_max - y_min)

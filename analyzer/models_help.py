@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image as pil_img
 from cnn.computer_vision import ComputerVision
+from cnn.cnn_model import Model as cnn_model
 
 
 def pil_to_base64(image_path):
@@ -43,8 +44,11 @@ def computer_vision(image_path):
     # Magic
     # src_image, draw_image, cropped_images = ComputerVision(
     draw_image, cropped_images = ComputerVision(
-        np_image=image, eritrocyte_length=50).detect_cells()
+        np_image=image, eritrocyte_length=70).detect_cells()
+    # tests = [np_image_to_base64(image, 'png') for image in cropped_images]
+    predictions = cnn_model(is_categorical=False).predict(cropped_images)
     return {'name': image_path.name,
-            # 'src_image': np_image_to_base64(src_image, format),
             'draw_image': np_image_to_base64(draw_image, format),
+            'predictions': predictions,
+            # 'tests': tests,
             }
