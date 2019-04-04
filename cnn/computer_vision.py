@@ -50,9 +50,9 @@ class ComputerVision():
         contours = self.clean_image(contours)
 
         # Draw detected nucleus on source image
-        # cv2.drawContours(image=img_for_paint, contours=contours,
-        #                  contourIdx=-1, color=(0, 255, 0),
-        #                  thickness=2, lineType=8, offset=(0, 0))
+        cv2.drawContours(image=img_for_paint, contours=contours,
+                         contourIdx=-1, color=(0, 255, 0),
+                         thickness=2, lineType=8, offset=(0, 0))
 
         # Crop source image to small ones
         cropped_images = self.crop_image(src_img, img_for_paint, contours)
@@ -94,9 +94,11 @@ class ComputerVision():
                 crop_delta = (crop_size - max_delta) // 2
                 # Make sure that we are in borders of the image
                 x_min = 0 if x_min - crop_delta < 0 else x_min - crop_delta
-                x_max = width if x_max + crop_delta > width else x_max + crop_delta
+                x_max = width if x_max + crop_delta > width else x_max \
+                    + crop_delta
                 y_min = 0 if y_min - crop_delta < 0 else y_min - crop_delta
-                y_max = height if y_max + crop_delta > height else y_max + crop_delta
+                y_max = height if y_max + crop_delta > height else y_max \
+                    + crop_delta
 
             # Draw
             cv2.rectangle(image_for_paint, (x_min, y_min),

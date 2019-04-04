@@ -1,4 +1,5 @@
 import numpy as np
+from keras import backend as K
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Lambda, Dense, Dropout,\
     Activation, Flatten
@@ -18,11 +19,13 @@ class Model():
         if self.is_categorical:
             self.model = self.lanet_model_categotical()
             self.model.load_weights(
-                Path(settings.BASE_DIR) / 'static' / 'weights' / 'LaNet-categorical.hdf5')
+                Path(settings.BASE_DIR) / 'static' / 'weights' /
+                'LaNet-categorical.hdf5')
         else:
             self.model = self.lanet_model_binary()
             self.model.load_weights(
-                Path(settings.BASE_DIR) / 'static' / 'weights' / 'LaNet-binary.hdf5')
+                Path(settings.BASE_DIR) / 'static' / 'weights' /
+                'LaNet-binary.hdf5')
 
     def summary(self):
         return self.model.summary()
@@ -110,4 +113,5 @@ class Model():
             dictionary['percentage'] = "%.2f".replace(
                 '[', '').replace(']', '') % (percent * 100)
             result.append(dictionary)
+        K.clear_session()
         return result

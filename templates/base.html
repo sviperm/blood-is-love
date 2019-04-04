@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    {% block styles %}
+    {% endblock styles %}
 
     {% block title %}
     {% endblock title %}
@@ -39,23 +42,25 @@
                     <ul class="navbar-nav ml-auto plc-1">
                         <li class="nav-item">
                             <a class="nav-link {% block analyzer-active %}{% endblock analyzer-active %}"
-                                href="{% url 'analyzer:analyzer' %}">Анализатор</a>
+                                href="{% url 'analyzer:analyzer' %}"><i class="fas fa-brain"></i> Анализатор</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% block upload-active %}{% endblock upload-active %}"" href="
-                                {% url 'analyzer:upload' %}">Загрузить</a>
+                            <a class="nav-link {% block upload-active %}{% endblock upload-active %}" href="
+                                {% url 'analyzer:upload' %}"><i class="fas fa-upload"></i> Загрузить</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% block data-active %}{% endblock data-active %}"" href="
-                                {% url 'analyzer:data' %}">База данных</a>
+                            <a class="nav-link {% block data-active %}{% endblock data-active %}" href="
+                                {% url 'analyzer:data' %}"><i class="fas fa-database"></i> База данных</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% block about-active %}{% endblock about-active %}"" href="
-                                {% url 'analyzer:about' %}">О проекте</a>
+                            <a class="nav-link {% block about-active %}{% endblock about-active %}" href="
+                                {% url 'analyzer:about' %}"><i class="fas fa-info-circle"></i> О проекте</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% block login-active %}{% endblock login-active %}"" href=" /admin/login">Вход /
-                                Регистрация</a> {% comment %} <!-- <a class="nav-link"
+                            <a class="nav-link {% block login-active %}{% endblock login-active %}"
+                                href=" /admin/login">
+                                Вход <i class="fas fa-sign-in-alt"></i></a> {% comment %}
+                            <!-- <a class="nav-link"
                                 href="{% url custom_auth:login %}">Вход / Регистрация</a> --> {% endcomment %}
                         </li>
                     </ul>

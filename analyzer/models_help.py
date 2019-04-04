@@ -43,7 +43,7 @@ def computer_vision(image_path):
     image = np.asarray(image)
     # Detect cells
     draw_image, cropped_images = ComputerVision(
-        np_image=image, eritrocyte_length=70).detect_cells()
+        np_image=image, eritrocyte_length=50).detect_cells()
     # Classify cells
     predictions = cnn_model(is_categorical=False).predict(cropped_images)
     return {'name': image_path.name,

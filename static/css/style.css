@@ -31,9 +31,8 @@
   white-space: nowrap !important;
 }
 
-.affix {
-  top: 20px;
-  z-index: 9999 !important;
+button#clear_list {
+  width: calc(100% - 42px);
 }
 
 .scrollspy {

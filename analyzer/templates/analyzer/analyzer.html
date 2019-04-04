@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/jquery.range.css' %}">
+{% endblock styles %}
+
 {% block title %}
 <title>Анализатор</title>
 {% endblock title %}
@@ -22,7 +26,8 @@
                     <span class="border-info custom-file-label form-control-file" for="id_file"></span>
                 </div>
                 <div class="input-group-append">
-                    <button id="upload_images" class="btn btn-outline-info" type="submit" disabled>Загрузить</button>
+                    <button id="upload_images" class="btn btn-outline-info" type="submit" disabled><i
+                            class="fas fa-brain"></i> Запустить</button>
                 </div>
             </div>
         </form>
@@ -32,17 +37,24 @@
 <!-- Files preview/output -->
 <div id="preview_block" class="row justify-content-between mt-2 {% if not images %}d-none{% endif %}">
 
+    <!-- Side bar -->
     <div class="col-lg-3 px-2">
         <div id="image_list" class="list-groups d-none d-lg-block">
             {% for image in images %}
-            <a class="list-group-item list-group-item-action" href="#image-{{ image.id }}">{{ image.name }}</a>
+            <a class="list-group-item list-group-item-action" href="#image-{{ image.id }}"><i class="far fa-image"></i>
+                {{ image.name }}</a>
             {% endfor %}
         </div>
-        <button id="clear_list" class="btn btn-outline-danger col mt-2 mb-3" type="button">Очистить</button>
+        <div class="btn-group mt-2 mb-3 px-0" role="group" aria-label="button group" style="width: 100%;">
+            <button id="clear_list" class="btn btn-outline-danger" type="button">Очистить</button>
+            <button type="button" class="btn btn-danger"><i class="fas fa-eye-dropper"></i></button>
+        </div>
+        <input type="hidden" class="range-slider" value="120,175" />
     </div>
 
+    <!-- Image views -->
     <div id="image_holder" class="scrollspy col-lg-9 mt-0 pl-2 pr-2" data-spy="scroll" data-target="#image_list"
-        data-offset="1">
+        data-offset="100">
 
         {% for image in images %}
         <h4 id="image-{{ image.id }}">{{ image.name }}</h4>
@@ -86,9 +98,6 @@
 
         {% endfor %}
 
-
-
-
     </div>
 </div>
 
@@ -97,5 +106,20 @@
 {% block scripts %}
 
 <script type="text/javascript" src="{% static 'js/preview.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.range.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.range-slider').jRange({
+            from: 0,
+            to: 270,
+            step: 1,
+            // scale: [0, 25, 50, 75, 100],
+            format: '%s',
+            width: 224,
+            showLabels: true,
+            isRange: true
+        });
+    });
+</script>
 
 {% endblock scripts %}

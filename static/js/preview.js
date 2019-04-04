@@ -33,15 +33,16 @@ $("#id_file").on('change', function () {
                 reader.onload = function (e) {
                     if (count == 0) {
                         $("<a />", {
-                            "class": "list-group-item list-group-item-action active",
+                            "id": "image-link-" + count,
+                            "class": "list-group-item list-group-item-action",
                             "href": "#image-" + count,
-                            text: self.files[count].name,
+                            html: "<i class='far fa-image'></i> " + self.files[count].name,
                         }).appendTo(image_list);
                     } else {
                         $("<a />", {
                             "class": "list-group-item list-group-item-action ",
                             "href": "#image-" + count,
-                            text: self.files[count].name,
+                            html: "<i class='far fa-image'></i> " + self.files[count].name,
                         }).appendTo(image_list);
                     }
                     $("<h4 />", {
@@ -81,7 +82,7 @@ $('#upload_images').on('click', function () {
             $('#clear_list').attr({
                 disabled: true,
             });
-            $('#upload_images').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Загрузка...');
+            $('#upload_images').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Думаю...');
             $('form').submit();
         }
     });
