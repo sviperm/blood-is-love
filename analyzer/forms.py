@@ -9,8 +9,33 @@ from analyzer.models import Image
 
 
 class ImageForm(forms.ModelForm):
-    # TODO: сделать форму вот такой
-    # <input type="file" class="custom-file-input" name="file" accept="image/*" required="" id="id_file" multiple="">
+    file = forms.FileField(widget=forms.FileInput(attrs={
+        'class': 'custom-file-input',
+        'name': 'file',
+        'accept': 'image/*',
+        'required': '',
+        # id="id_file",
+        'multiple': '',
+    }))
+    color_picker_h = forms.CharField(widget=forms.TextInput(attrs={
+        'type': 'hidden',
+        'class': 'range-slider-h',
+        'value': '120,175',
+        'style': 'display: none;',
+    }))
+    color_picker_s = forms.CharField(widget=forms.TextInput(attrs={
+        'type': 'hidden',
+        'class': 'range-slider-s',
+        'value': '80,255',
+        'style': 'display: none;',
+    }))
+    color_picker_v = forms.CharField(widget=forms.TextInput(attrs={
+        'type': 'hidden',
+        'class': 'range-slider-v',
+        'value': '50,255',
+        'style': 'display: none;',
+    }))
+
     class Meta:
         model = Image
-        fields = ("file",)
+        fields = ("file", "color_picker_h", "color_picker_s", "color_picker_v")

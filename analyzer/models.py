@@ -32,8 +32,9 @@ class Image(models.Model):
     def get_cover_base64(self):
         return pil_to_base64(Path(settings.MEDIA_ROOT) / self.file.name)
 
-    def analyze_image(self):
-        return computer_vision(Path(settings.MEDIA_ROOT) / self.file.name)
+    def analyze_image(self, hsv_lower_upper):
+        return computer_vision(Path(settings.MEDIA_ROOT) / self.file.name,
+                               hsv_lower_upper)
 
 
 @receiver(post_delete, sender=Image)

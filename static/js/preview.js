@@ -88,3 +88,33 @@ $('#upload_images').on('click', function () {
     });
 
 });
+
+$(document).ready(function () {
+    $('.range-slider-h').jRange({
+        from: 0,
+        to: 180,
+        step: 1,
+        format: '%s',
+        scale: [0, 36, 72, 108, 144, 180],
+        width: 265,
+        showLabels: true,
+        isRange: true
+    });
+});
+
+$(document).ready(function () {
+    $('.range-slider-s, .range-slider-v').jRange({
+        from: 0,
+        to: 255,
+        step: 1,
+        format: '%s',
+        scale: [0, 51, 102, 153, 204, 255],
+        width: 265,
+        showLabels: true,
+        isRange: true
+    });
+});
+
+$(document).on('click', '.dropdown-menu', function (e) {
+    e.stopPropagation();
+});

@@ -30,7 +30,7 @@ def analyzer(request):
                 # Save image locally
                 image = Image.objects.create(
                     user=request.user, title='Test', file=file)
-                img_dict = image.analyze_image()
+                img_dict = image.analyze_image(form.cleaned_data)
                 img_dict['id'] = i
                 images.append(img_dict)
                 # Completely delete image
@@ -42,7 +42,8 @@ def analyzer(request):
                                    })
     return render(request,
                   template_name='analyzer/analyzer.html',
-                  context={'form': form, })
+                  context={'form': form,
+                           'images': None})
 
 
 def upload(request):

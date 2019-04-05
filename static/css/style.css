@@ -30,6 +30,18 @@
 .custom-file-label {
   white-space: nowrap !important;
 }
+#color_picker_btn {
+  border-radius: 0;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+#upload_images {
+  border-left-width: 0;
+  margin-left: 0;
+}
 
 button#clear_list {
   width: calc(100% - 42px);

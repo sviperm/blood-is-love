@@ -21,13 +21,25 @@
             {% csrf_token %}
             <div class="input-group lg-3">
                 <div class="custom-file" id="custom_file">
-                    <input type="file" class="custom-file-input" name="file" accept="image/*" required="" id="id_file"
-                        multiple>
+                    <!-- <input type="file" class="custom-file-input" name="file" accept="image/*" required="" id="id_file"
+                        multiple> -->
+                    {{ form.file }}
                     <span class="border-info custom-file-label form-control-file" for="id_file"></span>
                 </div>
                 <div class="input-group-append">
+                    <button id="color_picker_btn" type="button" class="btn btn-danger dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                            class="fas fa-eye-dropper"></i></button>
+                    <div class="dropdown-menu dropdown-menu-right px-4 pt-5">
+                        <div class="form-group">
+                            {{ form.color_picker_h }}
+                            {{ form.color_picker_s }}
+                            {{ form.color_picker_v }}
+                        </div>
+                    </div>
                     <button id="upload_images" class="btn btn-outline-info" type="submit" disabled><i
-                            class="fas fa-brain"></i> Запустить</button>
+                            class="fas fa-brain"></i> Запустить
+                    </button>
                 </div>
             </div>
         </form>
@@ -47,9 +59,14 @@
         </div>
         <div class="btn-group mt-2 mb-3 px-0" role="group" aria-label="button group" style="width: 100%;">
             <button id="clear_list" class="btn btn-outline-danger" type="button">Очистить</button>
-            <button type="button" class="btn btn-danger"><i class="fas fa-eye-dropper"></i></button>
+            <!-- <button id="color_picker_btn" type="button" class="btn btn-danger"><i
+                    class="fas fa-eye-dropper"></i></button> -->
         </div>
-        <input type="hidden" class="range-slider" value="120,175" />
+        <!-- <div id="color_range" class="color-picker d-none">
+            <input type="hidden" class="range-slider-h" value="120,175" />
+            <input type="hidden" class="range-slider-s" value="80,270" />
+            <input type="hidden" class="range-slider-v" value="50,270" />
+        </div> -->
     </div>
 
     <!-- Image views -->
@@ -60,7 +77,7 @@
         <h4 id="image-{{ image.id }}">{{ image.name }}</h4>
         {% comment %} <img class="scroll-img" src="{{ image.src_image }}"> {% endcomment %}
         <img class="scroll-img" src="{{ image.draw_image }}">
-        <table class="table bg-info text-white">
+        <table class="table table-sm bg-info text-white">
             <thead>
                 <tr>
                     <th scope="col"></th>
@@ -107,19 +124,5 @@
 
 <script type="text/javascript" src="{% static 'js/preview.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.range.js' %}"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.range-slider').jRange({
-            from: 0,
-            to: 270,
-            step: 1,
-            // scale: [0, 25, 50, 75, 100],
-            format: '%s',
-            width: 224,
-            showLabels: true,
-            isRange: true
-        });
-    });
-</script>
 
 {% endblock scripts %}

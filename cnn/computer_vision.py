@@ -12,7 +12,8 @@ class ComputerVision():
                  np_image,
                  eritrocyte_length: int,
                  color_lower=np.array([120, 80, 50]),
-                 color_upper=np.array([175, 270, 270])):
+                 color_upper=np.array([180, 255, 255])):
+                #  color_upper=np.array([175, 270, 270])):
         super(ComputerVision, self).__init__()
         self.np_image = np_image
         self.color_lower = color_lower
