@@ -88,3 +88,8 @@ tbody tr:hover{
 .plc-1 {
   padding-left: .30rem!important;
 }
+
+#error {
+  margin: 0 auto;
+  display: block;
+}
