@@ -91,6 +91,7 @@ class Model():
         return self.model
 
     def predict(self, images):
+        # K.clear_session()
         prediction = self.model.predict(images)
         percentage = self.model.predict_proba(images, batch_size=32, verbose=0)
         if self.is_categorical:

@@ -5,6 +5,7 @@ from io import BytesIO
 
 import cv2
 import numpy as np
+from keras import backend as K
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from PIL import Image as pil_img
@@ -30,19 +31,26 @@ def analyzer(request):
                 # Save image locally
                 image = Image.objects.create(
                     user=request.user, title='Test', file=file)
-                img_dict = image.analyze_image(form.cleaned_data)
-                img_dict['id'] = i
-                images.append(img_dict)
+                try:
+                    img_dict = image.analyze_image(form.cleaned_data)
+                    img_dict['id'] = i
+                    images.append(img_dict)
+                    error = ''
+                except Exception as e:
+                    K.clear_session()
+                    error = e
                 # Completely delete image
                 image.delete()
             return render(request,
                           template_name='analyzer/analyzer.html',
-                          context={'form': form,
+                          context={'error': error,
+                                   'form': form,
                                    'images': images,
                                    })
     return render(request,
                   template_name='analyzer/analyzer.html',
-                  context={'form': form,
+                  context={'error': None,
+                           'form': form,
                            'images': None})
 
 
@@ -56,3 +64,7 @@ def data(request):
 
 def about(request):
     return HttpResponse('about')
+
+
+def error(request):
+    return render(request, template_name='error.html',)

@@ -32,7 +32,7 @@ def np_image_to_base64(np_image, format):
     return f'data:image/{format};base64, {encoded_string}'
 
 
-def computer_vision(image_path, hsv_lower_upper):
+def computer_vision(image_path, image_settings):
     """
     :param `image_path` for the complete path of image.
     """
@@ -41,19 +41,22 @@ def computer_vision(image_path, hsv_lower_upper):
     image = pil_img.open(image_path)
     # Image to array
     image = np.asarray(image)
-    color_picker_h = hsv_lower_upper['color_picker_h'].split(',')
-    color_picker_s = hsv_lower_upper['color_picker_s'].split(',')
-    color_picker_v = hsv_lower_upper['color_picker_v'].split(',')
+    eritrocyte_length = int(image_settings['range_picker'])
+    color_picker_h = image_settings['color_picker_h'].split(',')
+    color_picker_s = image_settings['color_picker_s'].split(',')
+    color_picker_v = image_settings['color_picker_v'].split(',')
     color_lower = np.array(
-        [int(color_picker_h[0]), int(color_picker_s[0]), int(color_picker_v[0])])
+        [int(color_picker_h[0]), int(color_picker_s[0]), int(color_picker_v[0])
+         ])
     color_upper = np.array(
-        [int(color_picker_h[1]), int(color_picker_s[1]), int(color_picker_v[1])])
+        [int(color_picker_h[1]), int(color_picker_s[1]), int(color_picker_v[1])
+         ])
     # Detect cells
     draw_image, cropped_images = ComputerVision(
         np_image=image,
         color_lower=color_lower,
         color_upper=color_upper,
-        eritrocyte_length=50).detect_cells()
+        eritrocyte_length=eritrocyte_length).detect_cells()
     # Classify cells
     predictions = cnn_model(is_categorical=False).predict(cropped_images)
     return {'name': image_path.name,

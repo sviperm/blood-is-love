@@ -17,6 +17,12 @@ class ImageForm(forms.ModelForm):
         # id="id_file",
         'multiple': '',
     }))
+    range_picker = forms.CharField(widget=forms.TextInput(attrs={
+        'type': 'hidden',
+        'class': 'range-picker',
+        'value': '50',
+        'style': 'display: none;',
+    }))
     color_picker_h = forms.CharField(widget=forms.TextInput(attrs={
         'type': 'hidden',
         'class': 'range-slider-h',
@@ -38,4 +44,5 @@ class ImageForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ("file", "color_picker_h", "color_picker_s", "color_picker_v")
+        fields = ("file", "range_picker", "color_picker_h",
+                  "color_picker_s", "color_picker_v")

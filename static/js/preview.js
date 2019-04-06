@@ -90,6 +90,19 @@ $('#upload_images').on('click', function () {
 });
 
 $(document).ready(function () {
+    $('.range-picker').jRange({
+        from: 0,
+        to: 150,
+        step: 5,
+        scale: [0, 30, 60, 90, 120, 150],
+        format: '%s',
+        width: 265,
+        showLabels: true,
+        snap: true
+    });
+});
+
+$(document).ready(function () {
     $('.range-slider-h').jRange({
         from: 0,
         to: 180,
@@ -114,6 +127,7 @@ $(document).ready(function () {
         isRange: true
     });
 });
+
 
 $(document).on('click', '.dropdown-menu', function (e) {
     e.stopPropagation();
