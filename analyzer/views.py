@@ -22,7 +22,6 @@ def home(request):
 def analyzer(request):
     form = ImageForm()
     if request.method == 'POST':
-        user = request.user
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             images = []
