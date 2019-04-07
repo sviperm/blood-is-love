@@ -41,6 +41,9 @@ def computer_vision(image_path, image_settings):
     image = pil_img.open(image_path)
     # Image to array
     image = np.asarray(image)
+    # if image has alfa layer -> delete it
+    if np.size(image, 2) == 4:
+        image = np.delete(image, 3, 2)
     eritrocyte_length = int(image_settings['range_picker'])
     color_picker_h = [
         int(val) for val in image_settings['color_picker_h'].split(',')

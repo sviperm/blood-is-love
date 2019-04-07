@@ -1,17 +1,10 @@
-import base64
-import codecs
-import urllib
-from io import BytesIO
-
-import cv2
-import numpy as np
-from keras import backend as K
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from PIL import Image as pil_img
-
 from analyzer.forms import ImageForm
 from analyzer.models import Image
+from django.conf import settings
+
+from keras import backend as K
 
 
 def home(request):
@@ -34,22 +27,27 @@ def analyzer(request):
                     img_dict = image.analyze_image(form.cleaned_data)
                     img_dict['id'] = i
                     images.append(img_dict)
-                    error = ''
-                except Exception as e:
+                    # Completely delete image
+                    image.delete()
+                except Exception as ex:
+                    image.delete()
                     K.clear_session()
-                    error = e
-                # Completely delete image
-                image.delete()
+                    if settings.DEBUG:
+                        raise ex
+                    return render(request,
+                                  template_name='error.html',
+                                  context={
+                                      'error_title': type(ex).__name__,
+                                      'error_args': ex.args[0]
+                                  })
             return render(request,
                           template_name='analyzer/analyzer.html',
-                          context={'error': error,
-                                   'form': form,
+                          context={'form': form,
                                    'images': images,
                                    })
     return render(request,
                   template_name='analyzer/analyzer.html',
-                  context={'error': None,
-                           'form': form,
+                  context={'form': form,
                            'images': None})
 
 
