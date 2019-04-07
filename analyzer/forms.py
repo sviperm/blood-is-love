@@ -14,7 +14,6 @@ class ImageForm(forms.ModelForm):
         'name': 'file',
         'accept': 'image/*',
         'required': '',
-        # id="id_file",
         'multiple': '',
     }))
     range_picker = forms.CharField(widget=forms.TextInput(attrs={

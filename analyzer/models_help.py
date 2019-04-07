@@ -42,15 +42,25 @@ def computer_vision(image_path, image_settings):
     # Image to array
     image = np.asarray(image)
     eritrocyte_length = int(image_settings['range_picker'])
-    color_picker_h = image_settings['color_picker_h'].split(',')
-    color_picker_s = image_settings['color_picker_s'].split(',')
-    color_picker_v = image_settings['color_picker_v'].split(',')
+    color_picker_h = [
+        int(val) for val in image_settings['color_picker_h'].split(',')
+    ]
+    color_picker_s = [
+        int(val) for val in image_settings['color_picker_s'].split(',')
+    ]
+    color_picker_v = [
+        int(val) for val in image_settings['color_picker_v'].split(',')
+    ]
     color_lower = np.array(
-        [int(color_picker_h[0]), int(color_picker_s[0]), int(color_picker_v[0])
-         ])
+        [
+            color_picker_h[0], color_picker_s[0], color_picker_v[0]
+        ]
+    )
     color_upper = np.array(
-        [int(color_picker_h[1]), int(color_picker_s[1]), int(color_picker_v[1])
-         ])
+        [
+            color_picker_h[1], color_picker_s[1], color_picker_v[1]
+        ]
+    )
     # Detect cells
     draw_image, cropped_images = ComputerVision(
         np_image=image,

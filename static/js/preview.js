@@ -24,7 +24,7 @@ $("#id_file").on('change', function () {
     });
 
     // TODO: добавить разрешения
-    if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+    if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg" || extn == "bmp") {
 
         //loop for each file selected for uploaded.
         for (var i = 0; i < countFiles; i++) {
