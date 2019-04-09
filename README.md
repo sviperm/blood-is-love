@@ -3,6 +3,7 @@
 ![](images_for_readme/image_1.png)
 ## Мобильная версия
 ![](images_for_readme/image_2.png)
+![](images_for_readme/image_3.png)
 
 ## Функционал приложения
 - Анализатор
