@@ -1,13 +1,8 @@
 # Blood of vlad
 ## Десктопная версия
- <div style="text-align:center">
-  <img src ="images_for_readme\image_1.png" />
- </div>
-
+![](images_for_readme/image_1.png)
 ## Мобильная версия
- <div style="text-align:center">
-  <img src ="images_for_readme\image_2.png"/>
- </div>
+![](images_for_readme/image_2.png)
 
 ## Функционал приложения
 - Анализатор
