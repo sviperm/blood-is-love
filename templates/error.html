@@ -163,11 +163,11 @@
 </div>
 
 <div class="d-flex flex-wrap justify-content-center">
-	<a id="test" class="error-text error" tabindex="0" role="button" data-toggle="popover" data-placement="top"
+	<a id="test" class="error error-text" tabindex="0" role="button" data-toggle="popover" data-placement="top"
 		data-trigger="focus" title="{{ error_title }}" data-content="{{ error_args }}">
 		Что-то
 	</a>
-	<p class="error-text" style="padding-bottom: 5px;">
+	<p class="error-text">
 		пошло не так...
 	</p>
 </div>
@@ -179,9 +179,4 @@
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.3.0/snap.svg-min.js"></script>
 <script type="text/javascript" src="{% static 'js/error.js' %}"></script>
-<script>
-	$('#test').popover({
-		trigger: 'focus'
-	})
-</script>
 {% endblock scripts %}

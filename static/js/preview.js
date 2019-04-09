@@ -16,8 +16,14 @@ $("#id_file").on('change', function () {
             $('#upload_images').attr({
                 disabled: false,
             });
+            $('#color_picker_btn').attr({
+                disabled: false,
+            });
         } else {
             $('#upload_images').attr({
+                disabled: true,
+            });
+            $('#color_picker_btn').attr({
                 disabled: true,
             });
         }
@@ -34,7 +40,7 @@ $("#id_file").on('change', function () {
                     if (count == 0) {
                         $("<a />", {
                             "id": "image-link-" + count,
-                            "class": "list-group-item list-group-item-action",
+                            "class": "list-group-item list-group-item-action active",
                             "href": "#image-" + count,
                             html: "<i class='far fa-image'></i> " + self.files[count].name,
                         }).appendTo(image_list);
@@ -76,13 +82,17 @@ $('#upload_images').on('click', function () {
     $('input[type="file"]').each(function () {
         if ($('input[type="file"]').val() != "") {
             $('#upload_images').attr({
-                'class': 'btn btn-info',
+                'class': 'btn btn-primary',
+                disabled: true,
+            });
+            $('#color_picker_btn').attr({
                 disabled: true,
             });
             $('#clear_list').attr({
                 disabled: true,
             });
-            $('#upload_images').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Думаю...');
+            $('#upload_images').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Запустить');
+            // $('#upload_images').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Думаю...');
             $('form').submit();
         }
     });

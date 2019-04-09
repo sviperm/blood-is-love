@@ -1,39 +1,58 @@
+hr {
+  border-top: 3px solid rgba(0, 0, 0, 0.35);
+}
+
+.bg-nav {
+  background: linear-gradient(0deg, #36AFEC 0%, #2D7CE7 100%);
+  background-size: 320% 220%;
+}
+
+.bg-blue-grad {
+  background: radial-gradient(ellipse at center, #2D7CE7 0%, #36AFEC 100%);
+  background-size: 180% 200%;
+}
+
+/* ########################
+        Analyzer Page
+##########################*/
+/* File input */
 .custom-file-input {
   cursor: pointer;
 }
-#custom_file .custom-file-label::after {
+
+.custom-file-label {
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  cursor: pointer;
+  border-color: #34a4eb;
+}
+
+/* 'Choose' button */
+.custom-file-label::after {
+  cursor: pointer;
   content: "Выбрать";
   color: white;
-  background-color: #17a2b8;
+  background: #0a80ff;
   border-bottom-width: initial;
   height: 40px;
 }
 
-/* #custom_file .custom-file-label.selected::after {
-  content: "Выбрать другой";
-} */
-
-#custom_file .custom-file-label::before {
+.custom-file-label::before {
   content: "Файлы не выбраны";
   cursor: none;
 }
 
-/*when a value is selected, this class removes the content */
+/* When files are selected */
 .custom-file-label.selected::before {
   content: "Файлы выбраны" !important;
   cursor: none;
 }
 
-.custom-file {
-  overflow: hidden !important;
-}
-.custom-file-label {
-  white-space: nowrap !important;
-}
 #color_picker_btn {
   border-radius: 0;
 }
 
+/* No arrow */
 .dropdown-toggle::after {
   display: none;
 }
@@ -43,15 +62,30 @@
   margin-left: 0;
 }
 
-button#clear_list {
-  width: calc(100% - 42px);
+/* Side Bar  */
+a.list-group-item.active { 
+  background: #3296ea;
+  border-color: #3297ea;
 }
 
+a.list-group-item.active:hover { 
+  background: #3296ea;
+  border-color: #3297ea;
+}
+a.list-group-item:hover { 
+  background-color: #3297ea1c;
+  border: 1px solid rgba(0,0,0,.125);
+}
+
+#clear_list {
+  width: 100%;
+}
+
+/* Scrollspy  */
 .scrollspy {
   position: relative;
-  height: calc(100vh - 71px - 16px - 38px - 8px);
   overflow: auto;
-  border-color: #17a2b8;
+  height: calc(100vh - 71px - 16px - 38px - 8px);
   border-radius: calc(.25rem - 1px);
 }
 
@@ -61,34 +95,39 @@ button#clear_list {
   }
 }
 
+.image-card {
+  padding: 1rem;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+}
+
+.table {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
 .scroll-img {
   width: 100%;
-  /* height: 100%; */
-  border-radius: calc(.25rem - 1px);
+  border-radius: calc(.5rem - 1px);
 }
 
-a.list-group-item.active { 
-  background-color: #17a2b8 !important; 
-  border-color: #17a2b8;
+.table td, .table th {
+  border-top: none !important;
+  padding-left: .5rem;
 }
 
-a.list-group-item:hover { 
-  background-color: #edf8fa; 
+.table tfoot th {
+  vertical-align: bottom;
+  border-top: 2px solid #dee2e6 !important;
 }
-
-/* th {
-  text-align: center !important;
-  vertical-align: middle !important;
-} */
 
 tbody tr:hover{
-  background-color: #24bdd5;
+  background-color: rgba(220, 220, 220, 0.30);
 }
 
-.plc-1 {
-  padding-left: .30rem!important;
-}
-
+/* ########################
+         Error page
+##########################*/
 #error {
   margin: 0 auto;
   display: block;
@@ -110,6 +149,10 @@ tbody tr:hover{
   text-align: center;
   color: #212529;
   text-decoration: none;
+}
+
+p.error-text {
+  padding-bottom: 5px;
 }
 
 .error:hover {

@@ -6,7 +6,7 @@ from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
-from analyzer.models_help import computer_vision, pil_to_base64
+from analyzer.services import computer_vision, pil_to_base64
 
 
 class Image(models.Model):

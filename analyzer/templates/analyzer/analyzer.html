@@ -20,15 +20,13 @@
         <form enctype="multipart/form-data" method="POST">
             {% csrf_token %}
             <div class="input-group lg-3">
-                <div class="custom-file" id="custom_file">
-                    <!-- <input type="file" class="custom-file-input" name="file" accept="image/*" required="" id="id_file"
-                        multiple> -->
+                <div id="custom_file" class="custom-file">
                     {{ form.file }}
-                    <span class="border-info custom-file-label form-control-file" for="id_file"></span>
+                    <span class="custom-file-label form-control-file" for="{{ form.file.auto_id }}"></span>
                 </div>
                 <div class="input-group-append">
                     <button id="color_picker_btn" type="button" class="btn btn-danger dropdown-toggle"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled><i
                             class="fas fa-eye-dropper"></i></button>
                     <div class="dropdown-menu dropdown-menu-right px-4 pt-5">
                         <div class="form-group">
@@ -38,9 +36,8 @@
                             {{ form.color_picker_v }}
                         </div>
                     </div>
-                    <button id="upload_images" class="btn btn-outline-info" type="submit" disabled><i
-                            class="fas fa-brain"></i> Запустить
-                    </button>
+                    <button id="upload_images" class="btn btn-outline-primary" type="submit" disabled><i
+                            class="fas fa-circle"></i> Запустить</button>
                 </div>
             </div>
         </form>
@@ -53,67 +50,82 @@
     <!-- Side bar -->
     <div class="col-lg-3 px-2">
         <div id="image_list" class="list-groups d-none d-lg-block">
+            {% if result %}
+            <a class="list-group-item list-group-item-action active" href="#result">
+                <i class="fas fa-poll-h"></i> Результаты</a>
+            {% endif %}
             {% for image in images %}
             <a class="list-group-item list-group-item-action" href="#image-{{ image.id }}"><i class="far fa-image"></i>
                 {{ image.name }}</a>
             {% endfor %}
         </div>
-        <div class="btn-group mt-2 mb-3 px-0" role="group" aria-label="button group" style="width: 100%;">
-            <button id="clear_list" class="btn btn-outline-danger" type="button">Очистить</button>
-            <!-- <button id="color_picker_btn" type="button" class="btn btn-danger"><i
-                    class="fas fa-eye-dropper"></i></button> -->
-        </div>
-        <!-- <div id="color_range" class="color-picker d-none">
-            <input type="hidden" class="range-slider-h" value="120,175" />
-            <input type="hidden" class="range-slider-s" value="80,270" />
-            <input type="hidden" class="range-slider-v" value="50,270" />
-        </div> -->
+        <button id="clear_list" class="btn btn-outline-danger mt-2 mb-3 px-0" type="button"><i
+                class="fas fa-eraser"></i>
+            Очистить</button>
     </div>
 
-    <!-- Image views -->
+    <!-- Scrollspy -->
     <div id="image_holder" class="scrollspy col-lg-9 mt-0 pl-2 pr-2" data-spy="scroll" data-target="#image_list"
         data-offset="100">
 
+        <!-- Common results -->
+        {% if result %}
+        <div id="result" class="image-card bg-blue-grad">
+            <h4 class="text-white">Результаты: </h4>
+            <table class="table table-sm text-white">
+                <thead>
+                    <tr class="row m-0">
+                        <th class="d-inline-block col-3">Тип</th>
+                        <th class="d-inline-block col-5">Количество, шт</th>
+                        <th class="d-inline-block col-4">Процент, %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for type in result.types %}
+                    <tr lass="row m-0">
+                        <td class="d-inline-block col-3">{{ type.name }}</td>
+                        <td class="d-inline-block col-5">{{ type.count }}</td>
+                        <td class="d-inline-block col-4">{{ type.percent }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr class="row m-0">
+                        <th class="d-inline-block col-3"><span class="float-right mr-2">Всего:</span></th>
+                        <th class="d-inline-block col-5">{{ result.total }}</th>
+                        <th class="d-inline-block col-4"></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <hr>
+        {% endif %}
+
+        <!-- Images -->
         {% for image in images %}
-        <h4 id="image-{{ image.id }}">{{ image.name }}</h4>
-        {% comment %} <img class="scroll-img" src="{{ image.src_image }}"> {% endcomment %}
-        <img class="scroll-img" src="{{ image.draw_image }}">
-        <table class="table table-sm bg-info text-white">
-            <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Тип</th>
-                    <th scope="col">Вероятность, %</th>
-                    <!-- <th scope="col"></th> -->
-                </tr>
-            </thead>
-            <tbody>
-                {% for prediction in image.predictions %}
-                <tr>
-
-
-                    <th scope="row"> {{ prediction.count }}</th>
-                    <td>{{ prediction.result }}</td>
-
-                    <td>{{ prediction.percentage}}</td>
-                    <!-- <td>
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Ошибка
-                        </button>
-                        <div class="dropdown-menu p-2">
-                            <div class="form-group">
-                                TODO: сделать форму для ошибки
-                            </div>
-                        </div>
-                    </td> -->
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% comment %} {% for t in image.tests %}
-        <img class="scroll-img" src="{{ t }}">
-        {% endfor %} {% endcomment %}
-
+        <div id="image-{{ image.id }}" class="image-card bg-blue-grad">
+            <h4 class="text-white pb-1">{{ image.name }}</h4>
+            <img class="scroll-img" src="{{ image.draw_image }}">
+            <!-- Result of each image -->
+            <table class="table table-sm text-white">
+                <thead>
+                    <tr class="row m-0">
+                        <th class="d-inline-block col-2">#</th>
+                        <th class="d-inline-block col-4 col-sm-5">Тип</th>
+                        <th class="d-inline-block col-6 col-sm-5">Вероятность, %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for prediction in image.predictions %}
+                    <tr lass="row m-0">
+                        <th class="d-inline-block col-2"> {{ prediction.count }}</th>
+                        <td class="d-inline-block col-4 col-sm-5">{{ prediction.result }}</td>
+                        <td class="d-inline-block col-6 col-sm-5">{{ prediction.percentage}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         {% endfor %}
 
     </div>

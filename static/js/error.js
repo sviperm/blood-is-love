@@ -1,3 +1,7 @@
+$('#test').popover({
+    trigger: 'focus'
+})
+
 window.onload = function () {
 
     var error = Snap.select("#error"),

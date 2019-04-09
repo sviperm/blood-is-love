@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from analyzer.forms import ImageForm
 from analyzer.models import Image
 from django.conf import settings
+from . import services
 
 from keras import backend as K
 
@@ -19,7 +20,6 @@ def analyzer(request):
         if form.is_valid():
             images = []
             for i, file in enumerate(request.FILES.getlist('file')):
-                # TODO: сделать проверку на уже имеющееся фотографии
                 # Save image locally
                 image = Image.objects.create(
                     user=request.user, title='Test', file=file)
@@ -40,9 +40,11 @@ def analyzer(request):
                                       'error_title': type(ex).__name__,
                                       'error_args': ex.args[0]
                                   })
+            result = services.get_result(images)
             return render(request,
                           template_name='analyzer/analyzer.html',
                           context={'form': form,
+                                   'result': result,
                                    'images': images,
                                    })
     return render(request,

@@ -29,16 +29,17 @@
 
     <header>
         <!-- Navigation bar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-nav">
+            <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-info"> -->
             <div class="container">
                 <a class="navbar-brand" href="{% url 'analyzer:home' %}">
                     <img src={% static 'images/emblem.png' %} width="45" height="45" alt=""><span
                         style="vertical-align: bottom">lood of Vlad</span>
                 </a>
-                <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbar9">
+                <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse" id="navbar9">
+                <div class="navbar-collapse collapse" id="navbar">
                     <ul class="navbar-nav ml-auto plc-1">
                         <li class="nav-item">
                             <a class="nav-link {% block analyzer-active %}{% endblock analyzer-active %}"
@@ -46,22 +47,20 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% block upload-active %}{% endblock upload-active %}" href="
-                                {% url 'analyzer:upload' %}"><i class="fas fa-upload"></i> Загрузить</a>
+                                        {% url 'analyzer:upload' %}"><i class="fas fa-upload"></i> Загрузить</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% block data-active %}{% endblock data-active %}" href="
-                                {% url 'analyzer:data' %}"><i class="fas fa-database"></i> База данных</a>
+                                        {% url 'analyzer:data' %}"><i class="fas fa-database"></i> База данных</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% block about-active %}{% endblock about-active %}" href="
-                                {% url 'analyzer:about' %}"><i class="fas fa-info-circle"></i> О проекте</a>
+                                        {% url 'analyzer:about' %}"><i class="fas fa-info-circle"></i> О проекте</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% block login-active %}{% endblock login-active %}"
                                 href=" /admin/login">
-                                Вход <i class="fas fa-sign-in-alt"></i></a> {% comment %}
-                            <!-- <a class="nav-link"
-                                href="{% url custom_auth:login %}">Вход / Регистрация</a> --> {% endcomment %}
+                                Вход <i class="fas fa-sign-in-alt"></i></a>
                         </li>
                     </ul>
                 </div>
