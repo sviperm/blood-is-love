@@ -1,18 +1,13 @@
-import base64
-import codecs
-import os
-from io import BytesIO
-from pathlib import Path
 import numpy as np
 from PIL import Image as pil_img
-from cnn.computer_vision import ComputerVision
-from cnn.cnn_model import Model as cnn_model
+import base64
 
 
 def pil_to_base64(image_path):
     """
     :param `image_path` for the complete path of image.
     """
+    import os
     format = image_path.suffix.replace('.', '').lower()
     if not os.image_path.isfile(image_path):
         return None
@@ -24,6 +19,8 @@ def pil_to_base64(image_path):
 
 
 def np_image_to_base64(np_image, format):
+    import codecs
+    from io import BytesIO
     np_image = pil_img.fromarray(np_image)
     img_bytes = BytesIO()
     np_image.save(img_bytes, format='PNG')
@@ -36,6 +33,8 @@ def computer_vision(image_path, image_settings):
     """
     :param `image_path` for the complete path of image.
     """
+    from cnn.computer_vision import ComputerVision
+    from cnn.cnn_model import Model as cnn_model
     format = image_path.suffix.replace('.', '').lower()
     # Open current file
     image = pil_img.open(image_path)
@@ -76,3 +75,32 @@ def computer_vision(image_path, image_settings):
             'draw_image': np_image_to_base64(draw_image, format),
             'predictions': predictions,
             }
+
+
+def get_result(images):
+    result = {'types': [],
+              'total': 0, }
+    for image in images:
+        for prediction in image['predictions']:
+            result['total'] += 1
+            if result['types']:
+                for cell_type in result['types']:
+                    type_exist = False
+                    if cell_type['name'] == prediction['result']:
+                        cell_type['count'] += 1
+                        type_exist = True
+                        break
+                if not type_exist:
+                    result['types'].append({
+                        'name': prediction['result'],
+                        'count': 1,
+                    })
+            else:
+                result['types'].append({
+                    'name': prediction['result'],
+                    'count': 1,
+                })
+    for cell_type in result['types']:
+        cell_type['percent'] = "%.2f" % (
+            cell_type['count'] / result['total'] * 100)
+    return result
