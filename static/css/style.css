@@ -63,6 +63,11 @@ hr {
 }
 
 /* Side Bar  */
+#image_list {
+  overflow: auto;
+  max-height: calc(100vh - 71px - 16px - 38px - 8px - 62px);
+}
+
 a.list-group-item.active { 
   background: #3296ea;
   border-color: #3297ea;
