@@ -102,9 +102,9 @@ $('#upload_images').on('click', function () {
 $(document).ready(function () {
     $('.range-picker').jRange({
         from: 0,
-        to: 150,
+        to: 250,
         step: 5,
-        scale: [0, 30, 60, 90, 120, 150],
+        scale: [0, 50, 100, 150, 200, 250],
         format: '%s',
         width: 265,
         showLabels: true,
