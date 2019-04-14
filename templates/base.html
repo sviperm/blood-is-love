@@ -47,11 +47,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% block upload-active %}{% endblock upload-active %}" href="
-                                        {% url 'analyzer:upload' %}"><i class="fas fa-upload"></i> Загрузить</a>
+                                        {% url 'dataset:upload' %}"><i class="fas fa-cloud-upload-alt"></i>
+                                Загрузить</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% block data-active %}{% endblock data-active %}" href="
-                                        {% url 'analyzer:data' %}"><i class="fas fa-database"></i> База данных</a>
+                                        {% url 'dataset:index' %}"><i class="fas fa-database"></i> База данных</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% block about-active %}{% endblock about-active %}" href="

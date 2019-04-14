@@ -138,6 +138,141 @@ tbody tr:hover{
 }
 
 /* ########################
+         Upload page
+##########################*/
+.drag-n-drop-area {
+  height: 300px;
+}
+
+.blue-round-bg {
+  background: #e0ebf7;
+  border-radius: 15px;
+  height: 100%;
+  width: 100%;
+  padding: 0.7rem;
+}
+
+.dd-inside{
+  border: 2px dashed #6eb4ff;
+  border-radius: 12px;
+  height: 100%;
+  width: 100%;
+  padding-top: 3rem;
+  padding-left: 1.3rem;
+  padding-right: 1.3rem;
+  text-align: center;
+  cursor: default;
+}
+
+.dd-icon {
+  overflow: -webkit-paged-x;
+}
+
+.dd-icon {
+  fill: #4098f7;
+  height: 100px;
+}
+
+.dd-text {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: #0a4e92
+}
+
+.dd-text > u {
+  cursor: pointer;
+}
+
+.preview-container {
+  background-color: #fbfbfb;
+  border: 2px solid #ebebeb;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.item-container {
+  padding: 0.5rem;
+  position: relative;
+  box-sizing: border-box;
+  width: 214px;
+  height: 230px;
+  transition-property: color, background;
+  transition-duration: 0.2s;
+}
+
+.item-container:hover {
+  background-color: #ebebeb;
+}
+
+.image-name {
+  padding: 0 15px 0 15px;
+  margin: 2px 0 8px 0;
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  font-weight: 400;
+  font-size: 15px;
+  color: #666666;
+  letter-spacing: 0.01em;
+}
+
+.close-btn {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 27px;
+}
+
+.item-container.hovered .close-btn {
+  display: block;
+}
+
+.close-btn:hover {
+  background-color: #cfcfcf;
+}
+
+.page-control {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  padding: 0 5px;
+  cursor: pointer;
+  transition-property: color, background;
+  transition-duration: 0.2s;
+}
+
+.smpdf_3eHO47el2SyBBY {
+  display: inline-block;
+  height: 24px;
+}
+
+.page-control .page-control-icon svg {
+  width: 14px;
+}
+
+.image {
+  text-align: center;
+}
+
+.image > img {
+  max-width: 173px;
+  max-height: 155px;
+}
+
+/* ########################
          Error page
 ##########################*/
 #error {
