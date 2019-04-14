@@ -9,14 +9,14 @@ from django.dispatch import receiver
 from analyzer.services import computer_vision, pil_to_base64
 
 
-class Image(models.Model):
+class AnalyzeImage(models.Model):
     user = models.ForeignKey(User,
                              on_delete=models.CASCADE,
                              verbose_name='Пользователь',
                              blank=True,
                              null=True)
     title = models.CharField(max_length=255, blank=True)
-    file = models.ImageField(upload_to='photo/')
+    file = models.ImageField(upload_to='analyzer/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -37,6 +37,6 @@ class Image(models.Model):
                                image_settings)
 
 
-@receiver(post_delete, sender=Image)
+@receiver(post_delete, sender=AnalyzeImage)
 def submission_delete(sender, instance, **kwargs):
     instance.file.delete(False)

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from analyzer.forms import ImageForm
-from analyzer.models import Image
+from analyzer.forms import AnalyzeImageForm
+from analyzer.models import AnalyzeImage
 from django.conf import settings
 from . import services
 
@@ -10,18 +10,17 @@ from keras import backend as K
 
 def home(request):
     return redirect('analyzer:analyzer')
-    # return HttpResponse('Home')
 
 
 def analyzer(request):
-    form = ImageForm()
+    form = AnalyzeImageForm()
     if request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES)
+        form = AnalyzeImageForm(request.POST, request.FILES)
         if form.is_valid():
             images = []
             for i, file in enumerate(request.FILES.getlist('file')):
                 # Save image locally
-                image = Image.objects.create(
+                image = AnalyzeImage.objects.create(
                     user=request.user, title='Test', file=file)
                 try:
                     img_dict = image.analyze_image(form.cleaned_data)
@@ -51,14 +50,6 @@ def analyzer(request):
                   template_name='analyzer/analyzer.html',
                   context={'form': form,
                            'images': None})
-
-
-def upload(request):
-    return HttpResponse('Upload')
-
-
-def data(request):
-    return HttpResponse('data')
 
 
 def about(request):

@@ -1,14 +1,14 @@
 from django import forms
 from django.utils.translation import gettext as _
 
-from analyzer.models import Image
+from analyzer.models import AnalyzeImage
 
 # class UploadFileForm(forms.Form):
 #     file = forms.ImageField(label='')
 #     widget = forms.ClearableFileInput(attrs={'multiple': True}))
 
 
-class ImageForm(forms.ModelForm):
+class AnalyzeImageForm(forms.ModelForm):
     file = forms.FileField(widget=forms.FileInput(attrs={
         'class': 'custom-file-input',
         'name': 'file',
@@ -42,6 +42,6 @@ class ImageForm(forms.ModelForm):
     }))
 
     class Meta:
-        model = Image
+        model = AnalyzeImage
         fields = ("file", "range_picker", "color_picker_h",
                   "color_picker_s", "color_picker_v")

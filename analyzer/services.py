@@ -33,8 +33,8 @@ def computer_vision(image_path, image_settings):
     """
     :param `image_path` for the complete path of image.
     """
-    from cnn.computer_vision import ComputerVision
-    from cnn.cnn_model import Model as cnn_model
+    from .cnn.computer_vision import ComputerVision
+    from .cnn.cnn_model import Model as cnn_model
     format = image_path.suffix.replace('.', '').lower()
     # Open current file
     image = pil_img.open(image_path)

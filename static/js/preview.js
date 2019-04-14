@@ -29,8 +29,7 @@ $("#id_file").on('change', function () {
         }
     });
 
-    // TODO: добавить разрешения
-    if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg" || extn == "bmp") {
+    if ((this).files && (this).files[0]) {
 
         //loop for each file selected for uploaded.
         for (var i = 0; i < countFiles; i++) {
@@ -92,7 +91,6 @@ $('#upload_images').on('click', function () {
                 disabled: true,
             });
             $('#upload_images').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Запустить');
-            // $('#upload_images').html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Думаю...');
             $('form').submit();
         }
     });
