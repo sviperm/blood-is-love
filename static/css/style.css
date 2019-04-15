@@ -164,8 +164,8 @@ tbody tr:hover{
   cursor: default;
 }
 
-.dd-icon {
-  overflow: -webkit-paged-x;
+.dd-icon-container {
+  /* overflow: -webkit-paged-x; */
 }
 
 .dd-icon {
@@ -195,11 +195,34 @@ tbody tr:hover{
 .item-container {
   padding: 0.5rem;
   position: relative;
-  box-sizing: border-box;
   width: 214px;
   height: 230px;
-  transition-property: color, background;
+  /* transition-property: color, background; */
   transition-duration: 0.2s;
+}
+
+@media (max-width: 1199px){
+  .item-container {
+    margin: 0 4px;
+  }
+}
+
+@media (max-width: 991px){
+  .item-container {
+    margin: 0 2px;
+  }
+}
+
+@media (max-width: 767px){
+  .item-container {
+    margin: 0 11px;
+  }
+}
+
+@media (max-width: 575px){
+  .item-container {
+    margin: auto;
+  }
 }
 
 .item-container:hover {
@@ -265,9 +288,11 @@ tbody tr:hover{
 
 .image {
   text-align: center;
+  padding: 0 12px;
 }
 
-.image > img {
+/* .image > img { */
+img {
   max-width: 173px;
   max-height: 155px;
 }
