@@ -205,19 +205,19 @@ tbody tr:hover{
   }
 }
 
-@media (max-width: 991px){
+@media (max-width: 992px){
   .item-container {
     margin: 0 2px;
   }
 }
 
-@media (max-width: 767px){
+@media (max-width: 768px){
   .item-container {
     margin: 0 11px;
   }
 }
 
-@media (max-width: 575px){
+@media (max-width: 576px){
   .item-container {
     margin: auto;
   }
@@ -248,40 +248,6 @@ tbody tr:hover{
   letter-spacing: 0.01em;
 }
 
-.close-btn {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 27px;
-}
-
-.item-container.hovered .close-btn {
-  display: block;
-}
-
-.close-btn:hover {
-  background-color: #cfcfcf;
-  cursor: pointer;
-}
-
-.page-control {
-  display: inline-block;
-  box-sizing: border-box;
-  width: 24px;
-  height: 24px;
-  padding: 0 5px;
-}
-
-.smpdf_3eHO47el2SyBBY {
-  display: inline-block;
-  height: 24px;
-}
-
-.page-control .page-control-icon svg {
-  width: 14px;
-}
-
 .image {
   text-align: center;
   padding: 0 12px;
@@ -294,6 +260,35 @@ tbody tr:hover{
 
 .item-container.hovered .image-style {
   box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.2);
+}
+
+.item-container.hovered .close-btn {
+  display: block;
+}
+
+.close-btn {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
+  border-radius: 0;
+  height: 20px;
+  width: 20px;
+}
+
+.close-btn:hover {
+  background-color: #cfcfcf;
+  cursor: pointer;
+}
+
+.close-icon {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0;
+  width: 15px;
+  height: 15px;
+  margin-bottom: 11px;
 }
 
 /* ########################
