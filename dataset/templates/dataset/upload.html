@@ -25,7 +25,6 @@
                 </svg>
             </div>
             <div class="dd-text">
-                <!-- <u>Выберите файлы</u> или перетащите сюда -->
                 <button type="button" class="upload-button-text btn btn-link js-upload-photos">
                     <u>Выберите файлы</u></button> или перетащите сюда
             </div>
@@ -35,32 +34,16 @@
     </div>
 </div>
 
-<div class="preview-container">
-    <div class="item-container">
-        <div class="image">
-            <img class="image-style" src=" {% static 'dataset/images/test-img-2.png' %} " alt=""
-                style="margin: 35px 0;">
-        </div>
-        <div class="image-name">
-            СуперПуперИзображение.png
-        </div>
-        <div class="close-btn">
-            <div class="page-control"><span class="page-control-icon smpdf_3eHO47el2SyBBY"><svg
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-                        <path fill-rule="evenodd"
-                            d="M13.582 15.001l-7.875-7.88L5 6.414 6.415 5l.707.707 7.873 7.88 7.874-7.88.707-.707 1.415 1.414-.707.707-7.875 7.88 7.875 7.88.707.708-1.415 1.414-.707-.708-7.874-7.879-7.873 7.88-.707.707L5 23.589l.707-.707 7.875-7.88z">
-                        </path>
-                    </svg></span></div>
-        </div>
-    </div>
+<div class="preview-container d-none">
 </div>
+{% endblock content %}
 
-
+{% block footer %}
 <div class="progress-bar progress-bar-striped progress-bar-animated fixed-bottom" role="progressbar" aria-valuenow="80"
     aria-valuemin="0" aria-valuemax="0" style="width: 0%;">
     0%</div>
 </div>
-{% endblock content %}
+{% endblock footer %}
 
 {% block scripts %}
 <script type="text/javascript" src="{% static 'dataset/js/jquery.ui.widget.js' %}"></script>

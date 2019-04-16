@@ -1,5 +1,7 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 
 class UploadedImage(models.Model):
@@ -19,9 +21,9 @@ class UploadedImage(models.Model):
         verbose_name = 'UploadedImage'
         verbose_name_plural = 'UploadedImages'
 
-    # def __str__(self):
-    #     """Unicode representation of UploadedImage."""
-    #     pass
+    def __str__(self):
+        """Unicode representation of UploadedImage."""
+        return f'{self.id} - {self.title}'
 
     # def save(self):
     #     """Save method for UploadedImage."""
@@ -45,3 +47,8 @@ class UploadedImage(models.Model):
     def get_name(self):
         pass
         # TODO: метод визуализации в HTML
+
+
+@receiver(post_delete, sender=UploadedImage)
+def submission_delete(sender, instance, **kwargs):
+    instance.file.delete(False)
