@@ -152,7 +152,7 @@ tbody tr:hover{
   padding: 0.7rem;
 }
 
-.dd-inside{
+.dd-inside  {
   border: 2px dashed #6eb4ff;
   border-radius: 12px;
   height: 100%;
@@ -162,10 +162,6 @@ tbody tr:hover{
   padding-right: 1.3rem;
   text-align: center;
   cursor: default;
-}
-
-.dd-icon-container {
-  /* overflow: -webkit-paged-x; */
 }
 
 .dd-icon {
@@ -179,8 +175,11 @@ tbody tr:hover{
   color: #0a4e92
 }
 
-.dd-text > u {
-  cursor: pointer;
+.upload-button-text {
+  padding: 0;
+  vertical-align: initial;
+  font-size: 1.4rem;
+  color: #0a4e92;
 }
 
 .preview-container {
@@ -197,7 +196,6 @@ tbody tr:hover{
   position: relative;
   width: 214px;
   height: 230px;
-  /* transition-property: color, background; */
   transition-duration: 0.2s;
 }
 
@@ -264,6 +262,7 @@ tbody tr:hover{
 
 .close-btn:hover {
   background-color: #cfcfcf;
+  cursor: pointer;
 }
 
 .page-control {
@@ -272,9 +271,6 @@ tbody tr:hover{
   width: 24px;
   height: 24px;
   padding: 0 5px;
-  cursor: pointer;
-  transition-property: color, background;
-  transition-duration: 0.2s;
 }
 
 .smpdf_3eHO47el2SyBBY {
@@ -291,10 +287,13 @@ tbody tr:hover{
   padding: 0 12px;
 }
 
-/* .image > img { */
-img {
+.image-style {
   max-width: 173px;
   max-height: 155px;
+}
+
+.item-container.hovered .image-style {
+  box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.2);
 }
 
 /* ########################
