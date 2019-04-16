@@ -20,8 +20,7 @@ def analyzer(request):
             images = []
             for i, file in enumerate(request.FILES.getlist('file')):
                 # Save image locally
-                image = AnalyzeImage.objects.create(
-                    user=request.user, title='Test', file=file)
+                image = AnalyzeImage.objects.create(file=file)
                 try:
                     img_dict = image.analyze_image(form.cleaned_data)
                     img_dict['id'] = i
