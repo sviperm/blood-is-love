@@ -140,6 +140,17 @@ tbody tr:hover{
 /* ########################
          Upload page
 ##########################*/
+.upload-title {
+  text-align: center;
+  color: #277dd8;
+  margin-bottom: 1.5rem;
+}
+
+.upload-title img {
+  vertical-align: sub;
+  width: 3rem;
+}
+
 .drag-n-drop-area {
   height: 300px;
 }
@@ -172,14 +183,15 @@ tbody tr:hover{
 .dd-text {
   margin-top: 1rem;
   font-size: 1.4rem;
-  color: #0a4e92
+  /* color: #0a4e92; */
+  color: #277dd8;
 }
 
 .upload-button-text {
   padding: 0;
   vertical-align: initial;
   font-size: 1.4rem;
-  color: #0a4e92;
+  color: #277dd8;
 }
 
 .preview-container {
@@ -188,7 +200,7 @@ tbody tr:hover{
   display: flex;
   flex-wrap: wrap;
   padding: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .item-container {
@@ -197,6 +209,7 @@ tbody tr:hover{
   width: 214px;
   height: 230px;
   transition-duration: 0.2s;
+  /* border-radius: 10px; */
 }
 
 @media (max-width: 1199px){
@@ -227,6 +240,10 @@ tbody tr:hover{
   background-color: #ebebeb;
 }
 
+.container-error {
+  background: rgba(228, 183, 183, 0.64) !important;
+  border: 2px solid #dcafaf87;
+}
 .image-name {
   padding: 0 15px 0 15px;
   margin: 2px 0 8px 0;
@@ -266,11 +283,16 @@ tbody tr:hover{
   display: block;
 }
 
+.container-error.hovered .close-btn {
+  display: none;
+}
+
 .close-btn {
   display: none;
   position: absolute;
   top: 0;
   right: 0;
+  border-right-width: 0px;
   padding: 0;
   border-radius: 0;
   height: 20px;
@@ -289,6 +311,11 @@ tbody tr:hover{
   width: 15px;
   height: 15px;
   margin-bottom: 11px;
+}
+
+.upload-more {
+  font-size: 1.2rem;
+  margin-bottom: 4rem;
 }
 
 /* ########################

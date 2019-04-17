@@ -13,6 +13,8 @@
 {% block upload-active %}active{% endblock upload-active %}
 
 {% block content %}
+<h2 class="upload-title">Пополнить базу данных <img src="{% static 'dataset/images/syringe_icon.png' %}" alt="">
+</h2>
 <div class="drag-n-drop-area">
     <div class="blue-round-bg">
         <div class="dd-inside">
@@ -36,6 +38,23 @@
 
 <div class="preview-container d-none">
 </div>
+<button class="upload-more btn btn-primary js-upload-photos d-none" type="button">Загрузить еще <svg
+        xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 192 192"
+        style=" fill:#000000;">
+        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+            stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+            font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+            <path d="M0,192v-192h192v192z" fill="none"></path>
+            <g fill="#ffffff">
+                <g id="surface1">
+                    <path
+                        d="M96,18c-43.00781,0 -78,34.99219 -78,78c0,43.00781 34.99219,78 78,78c43.00781,0 78,-34.99219 78,-78c0,-43.00781 -34.99219,-78 -78,-78zM96,30c36.51563,0 66,29.48438 66,66c0,36.51563 -29.48437,66 -66,66c-36.51562,0 -66,-29.48437 -66,-66c0,-36.51562 29.48438,-66 66,-66zM90,60v30h-30v12h30v30h12v-30h30v-12h-30v-30z">
+                    </path>
+                </g>
+            </g>
+        </g>
+    </svg>
+</button>
 {% endblock content %}
 
 {% block footer %}
