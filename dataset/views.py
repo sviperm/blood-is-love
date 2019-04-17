@@ -2,6 +2,7 @@ import time
 from collections import namedtuple
 from os.path import normcase
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -15,18 +16,18 @@ def index(request):
     return HttpResponse('test')
 
 
-class UploadView(View):
+class UploadView(LoginRequiredMixin, View):
+    login_url = '/admin/login/'
+    # redirect_field_name = '/'
+
     def get(self, request):
         return render(request, template_name='dataset/upload.html')
 
     def post(self, request):
-        time.sleep(1)
         form = UploadedImageForm(self.request.POST, self.request.FILES)
         if form.is_valid():
-            # TODO: Сделать одной строчкой
             image = form.save(commit=False)
-            image.title = form.files['file'].name
-            image.save()
+            image.save(user=request.user, title=form.files['file'].name)
             data = {'is_valid': True,
                     'html_item': render_to_string(
                         template_name='dataset/item_container.html',
@@ -42,10 +43,27 @@ class DeleteView(View):
 
     def post(self, request):
         pk = request.POST['pk']
-        image = UploadedImage.objects.get(pk=pk)
-        # TODO: add user vaildation
-        image.delete()
-        data = {'success': True, }
+        try:
+            image = UploadedImage.objects.get(pk=pk)
+        except UploadedImage.DoesNotExist as ex:
+            data = {'success': False,
+                    'html_modal_error': render_to_string(
+                        template_name='dataset/modal-error.html',
+                        context={
+                            'error_title': 'Изображения не существует',
+                            'error_args': 'Запрашиваемый объект не найден', }
+                    )}
+        if (image.user == request.user):
+            image.delete()
+            data = {'success': True, }
+        else:
+            data = {'success': False,
+                    'html_modal_error': render_to_string(
+                        template_name='dataset/modal-error.html',
+                        context={
+                            'error_title': 'Отказано в доступе',
+                            'error_args': 'Нет прав на удаления изображения', }
+                    )}
         return JsonResponse(data)
 
 

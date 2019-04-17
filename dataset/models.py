@@ -25,9 +25,10 @@ class UploadedImage(models.Model):
         """Unicode representation of UploadedImage."""
         return f'{self.id} - {self.title}'
 
-    # def save(self):
-    #     """Save method for UploadedImage."""
-    #     pass
+    def save(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        self.title = kwargs.pop('title')
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         """Return absolute url for UploadedImage."""
@@ -43,10 +44,6 @@ class UploadedImage(models.Model):
             if (x < 155):
                 return str(int((187 - x) / 2))
         return '16'
-
-    def get_name(self):
-        pass
-        # TODO: метод визуализации в HTML
 
 
 @receiver(post_delete, sender=UploadedImage)
