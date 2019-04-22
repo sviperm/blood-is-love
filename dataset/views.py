@@ -3,6 +3,7 @@ from collections import namedtuple
 from os.path import normcase
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -10,6 +11,7 @@ from django.views import View
 
 from .forms import UploadedImageForm
 from .models import UploadedImage
+from .services import page_navigation
 
 
 def index(request):
@@ -30,7 +32,7 @@ class UploadView(LoginRequiredMixin, View):
             image.save(user=request.user, title=form.files['file'].name)
             data = {'is_valid': True,
                     'html_item': render_to_string(
-                        template_name='dataset/item_container.html',
+                        template_name='dataset/includes/item_container.html',
                         context={'image': image},
                         request=request)
                     }
@@ -48,7 +50,7 @@ class DeleteView(View):
         except UploadedImage.DoesNotExist as ex:
             data = {'success': False,
                     'html_modal_error': render_to_string(
-                        template_name='dataset/modal-error.html',
+                        template_name='dataset/includes/modal_error.html',
                         context={
                             'error_title': 'Изображения не существует',
                             'error_args': 'Запрашиваемый объект не найден', }
@@ -59,7 +61,7 @@ class DeleteView(View):
         else:
             data = {'success': False,
                     'html_modal_error': render_to_string(
-                        template_name='dataset/modal-error.html',
+                        template_name='dataset/includes/modal-error.html',
                         context={
                             'error_title': 'Отказано в доступе',
                             'error_args': 'Нет прав на удаления изображения', }
@@ -67,5 +69,43 @@ class DeleteView(View):
         return JsonResponse(data)
 
 
-def single_image(request):
-    return HttpResponse('Single Image')
+def dataset(request):
+    return redirect('dataset:dataset_page', 1)
+
+
+class DatasetView(LoginRequiredMixin, View):
+    login_url = '/admin/login/'
+    # redirect_field_name = '/'
+
+    def get(self, request, page_num):
+        image_list = UploadedImage.objects.all().order_by('id')
+        paginator = Paginator(image_list, 10)
+        images_page = paginator.page(page_num)
+        return render(request,
+                      template_name='dataset/dataset.html',
+                      context={'page_num': page_num,
+                               'images': images_page,
+                               'page_nav': page_navigation(
+                                   images,
+                                   pages_num=5)
+                               }
+                      )
+
+    def post(self, request):
+        # form = UploadedImageForm(self.request.POST, self.request.FILES)
+        # if form.is_valid():
+        #     image = form.save(commit=False)
+        #     image.save(user=request.user, title=form.files['file'].name)
+        #     data = {'is_valid': True,
+        #             'html_item': render_to_string(
+        #                 template_name='dataset/includes/item_container.html',
+        #                 context={'image': image},
+        #                 request=request)
+        #             }
+        # else:
+        #     data = {'is_valid': False, }
+        return JsonResponse(data)
+
+
+def single_image(requestm, id):
+    return HttpResponse(f'Single Image - {id}')

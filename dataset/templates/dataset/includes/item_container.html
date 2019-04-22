@@ -5,7 +5,8 @@
     <div class="image-name">
         {{ image.title }}
     </div>
-    <button class="close-btn btn btn-link" data-url="{% url 'dataset:delete_image' %}" data-pk="{{ image.id }}" data-csrf="{{ csrf_token }}">
+    <button class="close-btn btn btn-link" data-url="{% url 'dataset:delete_image' %}" data-pk="{{ image.id }}"
+        data-csrf="{{ csrf_token }}">
         <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
             <path fill-rule="evenodd"
                 d="M13.582 15.001l-7.875-7.88L5 6.414 6.415 5l.707.707 7.873 7.88 7.874-7.88.707-.707 1.415 1.414-.707.707-7.875 7.88 7.875 7.88.707.708-1.415 1.414-.707-.708-7.874-7.879-7.873 7.88-.707.707L5 23.589l.707-.707 7.875-7.88z">
