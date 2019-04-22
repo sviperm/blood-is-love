@@ -1,25 +1,36 @@
-def page_navigation(page_object, pages_num):
-    page = page_object.number
-    result = {
-        'pages': {},
-    }
-    start_page = page - int(pages_num/2)
-    end_page = page + int(pages_num / 2)
+def page_navigation(page, pages_nav_num):
+    page_num = page.number
+    max_page = page.paginator.num_pages
 
-    if (start_page > 0) and (end_page < page_object.paginator.num_pages):
-        pass
-    elif (start_page < 0):
-        nf
+    result = {
+        'pages': [],
+    }
+
+    if (max_page > pages_nav_num):
+        start_page = page_num - int(pages_nav_num / 2)
+        end_page = page_num + int(pages_nav_num / 2)
+
+        if (start_page < 1):
+            start_page = 1
+            end_page = pages_nav_num
+        elif (end_page > max_page):
+            start_page = max_page - pages_nav_num + 1
+            end_page = max_page
+
+        result['first'] = 1
+        result['last'] = max_page
+
+    else:
+        start_page = 1
+        end_page = max_page
+
+    if page.has_previous():
+        result['previous'] = page.number - 1
+
+    if page.has_next():
+        result['next'] = page.number + 1
 
     for i in range(start_page, end_page + 1):
-        pass
+        result['pages'].append(i)
 
-    if page_object.has_previous():
-        result['previous'] = page_object.number - 1
-
-    if page_object.has_next():
-        result['next'] = page_object.number + 1
-
-    if page_object.has_other_pages():
-        result['first'] = 1
-        result['last'] = page_object.paginator.num_pages
+    return result

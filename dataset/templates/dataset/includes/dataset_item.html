@@ -1,10 +1,10 @@
-<a href="{% url 'dataset:single_image' id=image.id %}">
-    <div class="item-container">
+<div class="item-container">
+    <a href="{% url 'dataset:single_image' id=image.id %}">
         <div class="image">
             <img class="image-style" src="{{ image.file.url }}" alt="" style="margin: {{ image.calc_margin }}px 0;">
         </div>
         <div class="image-name">
             {{ image.title }}
         </div>
-    </div>
-</a>
+    </a>
+</div>

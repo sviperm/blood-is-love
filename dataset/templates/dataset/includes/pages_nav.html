@@ -1,29 +1,84 @@
 <nav aria-label="page navigation" style="display: table;margin: 0 auto;">
     <ul class="pagination">
+
+        <!-- Go tu first button -->
+        {% if page_nav.first %}
+        {% if page_nav.previous %}
         <li class="page-item">
-            <a class="page-link" href="{% url 'dataset:dataset_page' page=1 %}" aria-label="First">
+            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.first %}" aria-label="First">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.first %}" aria-label="First">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% endif %}
+        {% endif %}
+
+        <!-- Go to previous button -->
+        {% if page_nav.previous %}
         <li class="page-item">
+            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.previous %}"
+                aria-label="Previous">
+                <span aria-hidden="true">&#x25C2;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
             <a class="page-link" href="#" aria-label="Previous">
                 <span aria-hidden="true">&#x25C2;</span>
             </a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">5</a></li>
+        {% endif %}
+
+        <!-- Go to page buttons -->
+        {% for page in page_nav.pages %}
+
+        {% if page_num == page  %}
+        <li class="page-item disabled"><a class="page-link"
+                href="{% url 'dataset:dataset_page' page_num=page %}"><b>{{ page }}</b></a>
+        </li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="{% url 'dataset:dataset_page' page_num=page %}">{{ page }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        <!-- Go to next button -->
+        {% if page_nav.next %}
         <li class="page-item">
+            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.next %}" aria-label="Next">
+                <span aria-hidden="true">&#x25B8;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
             <a class="page-link" href="#" aria-label="Next">
                 <span aria-hidden="true">&#x25B8;</span>
             </a>
         </li>
+        {% endif %}
+
+        <!-- Go to last button -->
+        {% if page_nav.last %}
+        {% if page_nav.next %}
         <li class="page-item">
-            <a class="page-link" href="#" aria-label="Last">
+            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.last %}" aria-label="Last">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.last %}" aria-label="Last">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% endif %}
+        {% endif %}
+
+
     </ul>
 </nav>
