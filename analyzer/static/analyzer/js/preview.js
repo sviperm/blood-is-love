@@ -1,4 +1,5 @@
 $("#id_file").on('change', function () {
+    console.log('test');
     $(this).next('.form-control-file').addClass("selected");
 
     //Get count of selected files
