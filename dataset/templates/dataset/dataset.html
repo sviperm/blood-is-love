@@ -11,68 +11,77 @@
 {% block content %}
 
 <div class="preview-container">
+    <!-- Title -->
     <div class="col-12 d-flex justify-content-center mb-4">
         <h2 class="stat-title">Статистика</h2>
     </div>
-    <div class="row">
-        <div class="col-8 col-sm-4 " style="margin: 0 auto 1rem auto;">
-            <canvas id="pieChart" width="400" height="400" aria-label="Cells amount chart" role="pie-chart"></canvas>
-        </div>
-        <div class="row col-sm-8 m-0">
-            <div class="col-sm-4 mb-2 px-1">
+    <!-- Statistics buttons -->
+    <div class="col-12 mb-4">
+        <div class="row">
+            <div class="col-md-4 mb-2 px-1">
                 <a href="#" class="btn btn-primary btn-lg stat-link-btn" role="button">Всего - 257</a>
             </div>
-            <div class="col-sm-4 mb-2 px-1">
+            <div class="col-md-4 mb-2 px-1">
                 <a href="#" class="btn btn-success btn-lg stat-link-btn" role="button">Проверено -
                     257</a>
             </div>
-            <div class="col-sm-4 mb-2 px-1">
+            <div class="col-md-4 mb-2 px-1">
                 <a href="#" class="btn btn-danger btn-lg stat-link-btn" role="button">Не проверено -
                     257</a>
             </div>
-            <div class="col-sm-6 mb-2">
+        </div>
+    </div>
+    <!-- Data -->
+    <div class="row">
+        <!-- Chart -->
+        <div class="chart-container col-8 col-sm-5 col-md-6 col-lg-4">
+            <canvas id="pieChart" width="400" height="400" aria-label="Cells amount chart" role="pie-chart"></canvas>
+        </div>
+        <!-- Types of cells -->
+        <div class="row col-sm-7 col-md-6 col-lg-8 m-0">
+            <div class="col-sm-12 col-lg-6 mb-2">
                 <a class="stat-link" href="#">
                     <div class="stat-cell-count">
                         <span class="stat-text">Нейтрофилы</span>
-                        <div class="chart-underline chart-red"></div>
+                        <div class="chart-card chart-red"></div>
                     </div>
-                    <span class="stat-text ml-1">- 91</span>
+                    <span class="stat-text ml-1">- 2491</span>
                 </a>
             </div>
-            <div class="col-sm-6 mb-2">
+            <div class="col-sm-12 col-lg-6 mb-2">
                 <a class="stat-link" href="#">
                     <div class="stat-cell-count">
                         <span class="stat-text">Эозинофилы</span>
-                        <div class="chart-underline chart-blue"></div>
+                        <div class="chart-card chart-blue"></div>
                     </div>
-                    <span class="stat-text ml-1">- 91</span>
+                    <span class="stat-text ml-1">- 2491</span>
                 </a>
             </div>
-            <div class="col-sm-6 mb-2">
+            <div class="col-sm-12 col-lg-6 mb-2">
                 <a class="stat-link" href="#">
                     <div class="stat-cell-count">
                         <span class="stat-text">Базофилы</span>
-                        <div class="chart-underline chart-yellow"></div>
+                        <div class="chart-card chart-yellow"></div>
                     </div>
-                    <span class="stat-text ml-1">- 91</span>
+                    <span class="stat-text ml-1">- 2491</span>
                 </a>
             </div>
-            <div class="col-sm-6 mb-2">
+            <div class="col-sm-12 col-lg-6 mb-2">
                 <a class="stat-link" href="#">
                     <div class="stat-cell-count">
                         <span class="stat-text">Моноциты</span>
-                        <div class="chart-underline chart-green"></div>
+                        <div class="chart-card chart-green"></div>
                     </div>
-                    <span class="stat-text ml-1">- 91</span>
+                    <span class="stat-text ml-1">- 2491</span>
                 </a>
             </div>
-            <div class="col-sm-6 mb-2">
+            <div class="col-sm-12 col-lg-6 mb-2">
                 <a class="stat-link" href="#">
                     <div class="stat-cell-count">
                         <span class="stat-text">Лимфоциты</span>
-                        <div class="chart-underline chart-violet"></div>
+                        <div class="chart-card chart-violet"></div>
                     </div>
-                    <span class="stat-text ml-1">- 91</span>
+                    <span class="stat-text ml-1">- 2491</span>
                 </a>
             </div>
         </div>

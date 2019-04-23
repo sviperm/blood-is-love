@@ -20,6 +20,10 @@ hr {
   background-size: 180% 200%;
 }
 
+.round-corners {
+  border-radius: 12px;
+}
+
 /* ########################
         Analyzer Page
 ##########################*/
@@ -331,10 +335,6 @@ tbody tr:hover{
          Dataset page
 ##########################*/
 
-.round-corners {
-  border-radius: 12px;
-}
-
 .stat-title:hover {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23ff9800' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
   background-position: 0 100%;
@@ -344,6 +344,9 @@ tbody tr:hover{
   cursor: default;
 }
 
+.chart-container{
+  margin: 0 auto 1rem auto;
+}
 
 .stat-cell-count {
   display: -webkit-inline-box;
@@ -353,7 +356,6 @@ tbody tr:hover{
 .stat-text {
   font-size: 1.35rem;
   font-weight: 300;
-  /* color: #212529; */
 }
 
 .stat-link-btn {
@@ -371,7 +373,6 @@ border-radius: 8px;
 -ms-transition:box-shadow .1s ease-out, box-shadow .2s ease-in;
 -moz-transition:box-shadow .1s ease-out, box-shadow .2s ease-in;
 -webkit-transition:box-shadow .1s ease-out, box-shadow .2s ease-in;
-/* ...and now override with proper CSS property */
 transition:box-shadow .1s ease-out, box-shadow .2s ease-in;
 }
 
@@ -380,7 +381,7 @@ a.stat-link:hover {
   box-shadow: 0px 4px 10px 5px rgba(0,0,0,0.2);
 }
 
-.chart-underline {
+.chart-card {
   width: 100%;
   height: 8px;
   border-radius: 15px;
