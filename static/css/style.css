@@ -209,6 +209,7 @@ tbody tr:hover{
   flex-wrap: wrap;
   padding: 1rem;
   margin-bottom: 1.5rem;
+  border-radius: 12px;
 }
 
 .item-container {
@@ -334,6 +335,76 @@ tbody tr:hover{
   border-radius: 12px;
 }
 
+.stat-title:hover {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23ff9800' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+  background-position: 0 100%;
+  background-size: auto 4px;
+  background-repeat: repeat-x;
+  text-decoration: none;
+  cursor: default;
+}
+
+
+.stat-cell-count {
+  display: -webkit-inline-box;
+  display: inline-block;
+}
+
+.stat-text {
+  font-size: 1.35rem;
+  font-weight: 300;
+  /* color: #212529; */
+}
+
+.stat-link-btn {
+  font-weight: 400;
+  width: 100%;
+  font-size: 1.04rem;
+}
+
+a.stat-link {
+color: #212529;
+display: inline-block;
+padding: .5rem;
+border-radius: 8px;
+-o-transition:box-shadow .1s ease-out, box-shadow .2s ease-in;
+-ms-transition:box-shadow .1s ease-out, box-shadow .2s ease-in;
+-moz-transition:box-shadow .1s ease-out, box-shadow .2s ease-in;
+-webkit-transition:box-shadow .1s ease-out, box-shadow .2s ease-in;
+/* ...and now override with proper CSS property */
+transition:box-shadow .1s ease-out, box-shadow .2s ease-in;
+}
+
+a.stat-link:hover {
+  text-decoration: none;
+  box-shadow: 0px 4px 10px 5px rgba(0,0,0,0.2);
+}
+
+.chart-underline {
+  width: 100%;
+  height: 8px;
+  border-radius: 15px;
+}
+
+.chart-red {
+  background-color: rgba(255, 99, 132, 1);
+}
+
+.chart-blue {
+  background-color: rgba(54, 162, 235, 1);
+}
+
+.chart-yellow {
+  background-color: rgba(255, 206, 86, 1);
+}
+
+.chart-green {
+  background-color: rgba(75, 192, 192, 1);
+}
+
+.chart-violet {
+  background-color: rgba(153, 102, 255, 1);
+}
 
 /* ########################
          Error page

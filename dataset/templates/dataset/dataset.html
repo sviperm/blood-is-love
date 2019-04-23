@@ -10,22 +10,71 @@
 
 {% block content %}
 
-<div class="preview-container round-corners">
+<div class="preview-container">
     <div class="col-12 d-flex justify-content-center mb-4">
-        <h4>Статистика</h4>
+        <h2 class="stat-title">Статистика</h2>
     </div>
     <div class="row">
-        <div class="col-4">
+        <div class="col-8 col-sm-4 " style="margin: 0 auto 1rem auto;">
             <canvas id="pieChart" width="400" height="400" aria-label="Cells amount chart" role="pie-chart"></canvas>
         </div>
-        <div class="row col-8 m-0">
-            <div class="col-12">Всего</div>
-            <div class="col-6">Нейтрофилы</div>
-            <div class="col-6">Эозинофилы</div>
-            <div class="col-6">Базофилы</div>
-            <div class="col-6">Моноциты</div>
-            <div class="col-6">Лимфоциты</div>
-            <div class="col-6">Не проверено</div>
+        <div class="row col-sm-8 m-0">
+            <div class="col-sm-4 mb-2 px-1">
+                <a href="#" class="btn btn-primary btn-lg stat-link-btn" role="button">Всего - 257</a>
+            </div>
+            <div class="col-sm-4 mb-2 px-1">
+                <a href="#" class="btn btn-success btn-lg stat-link-btn" role="button">Проверено -
+                    257</a>
+            </div>
+            <div class="col-sm-4 mb-2 px-1">
+                <a href="#" class="btn btn-danger btn-lg stat-link-btn" role="button">Не проверено -
+                    257</a>
+            </div>
+            <div class="col-sm-6 mb-2">
+                <a class="stat-link" href="#">
+                    <div class="stat-cell-count">
+                        <span class="stat-text">Нейтрофилы</span>
+                        <div class="chart-underline chart-red"></div>
+                    </div>
+                    <span class="stat-text ml-1">- 91</span>
+                </a>
+            </div>
+            <div class="col-sm-6 mb-2">
+                <a class="stat-link" href="#">
+                    <div class="stat-cell-count">
+                        <span class="stat-text">Эозинофилы</span>
+                        <div class="chart-underline chart-blue"></div>
+                    </div>
+                    <span class="stat-text ml-1">- 91</span>
+                </a>
+            </div>
+            <div class="col-sm-6 mb-2">
+                <a class="stat-link" href="#">
+                    <div class="stat-cell-count">
+                        <span class="stat-text">Базофилы</span>
+                        <div class="chart-underline chart-yellow"></div>
+                    </div>
+                    <span class="stat-text ml-1">- 91</span>
+                </a>
+            </div>
+            <div class="col-sm-6 mb-2">
+                <a class="stat-link" href="#">
+                    <div class="stat-cell-count">
+                        <span class="stat-text">Моноциты</span>
+                        <div class="chart-underline chart-green"></div>
+                    </div>
+                    <span class="stat-text ml-1">- 91</span>
+                </a>
+            </div>
+            <div class="col-sm-6 mb-2">
+                <a class="stat-link" href="#">
+                    <div class="stat-cell-count">
+                        <span class="stat-text">Лимфоциты</span>
+                        <div class="chart-underline chart-violet"></div>
+                    </div>
+                    <span class="stat-text ml-1">- 91</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
