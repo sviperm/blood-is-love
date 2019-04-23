@@ -68,7 +68,7 @@ class DeleteView(View):
 
 
 def dataset(request):
-    return redirect('dataset:dataset_page', 1)
+    return render(request, template_name='dataset/dataset.html')
 
 
 class DatasetView(LoginRequiredMixin, View):
@@ -79,12 +79,12 @@ class DatasetView(LoginRequiredMixin, View):
         paginator = Paginator(image_list, 10)
         page = paginator.get_page(page_num)
         return render(request,
-                      template_name='dataset/dataset.html',
+                      template_name='dataset/dataset_pages.html',
                       context={'page_num': page_num,
                                'images': page,
                                'page_nav': page_navigation(
                                    page=page,
-                                   pages_nav_num=3)
+                                   pages_nav_num=5)
                                }
                       )
 

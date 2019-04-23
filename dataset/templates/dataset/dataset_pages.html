@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>База данных - {{ page_num }}</title>
+{% endblock title %}
+
+{% block data-active %}active{% endblock data-active %}
+
+{% block content %}
+
+{% include 'dataset\includes\pages_nav.html' %}
+<div class="preview-container round-corners">
+    {% for image in images %}
+    {% include 'dataset\includes\dataset_item.html' %}
+    {% endfor %}
+</div>
+{% include 'dataset\includes\pages_nav.html' %}
+
+{% endblock content %}
