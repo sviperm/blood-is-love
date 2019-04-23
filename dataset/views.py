@@ -5,8 +5,6 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.views import View
 
-import time
-
 from .forms import UploadedImageForm
 from .models import UploadedImage
 from .services import page_navigation
@@ -69,6 +67,17 @@ class DeleteView(View):
 
 def dataset(request):
     return render(request, template_name='dataset/dataset.html')
+
+
+class PieChartView(View):
+    def get(self, request):
+        response = {'Нейтрофилы': 1,
+                    'Эозинофилы': 2,
+                    'Моноциты': 1,
+                    'Лимфоциты': 1,
+                    'Базофилы': 2,
+                    }
+        return JsonResponse(response)
 
 
 class DatasetView(LoginRequiredMixin, View):

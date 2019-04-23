@@ -10,4 +10,5 @@ urlpatterns = [
     path('upload/', UploadView.as_view(), name='upload'),
     path('delete_image/', DeleteView.as_view(), name='delete_image'),
     path('image-<int:id>/', single_image, name='single_image'),
+    path('get_pie_chart/', PieChartView.as_view(), name="api_chart"),
 ]

@@ -10,10 +10,29 @@
 
 {% block content %}
 
-<div class="preview-container round-corners" style="height: 300px">
-</div>
-
-<div class="preview-container round-corners" style="height: 300px">
+<div class="preview-container round-corners">
+    <div class="col-12 d-flex justify-content-center mb-4">
+        <h4>Статистика</h4>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <canvas id="pieChart" width="400" height="400" aria-label="Cells amount chart" role="pie-chart"></canvas>
+        </div>
+        <div class="row col-8 m-0">
+            <div class="col-12">Всего</div>
+            <div class="col-6">Нейтрофилы</div>
+            <div class="col-6">Эозинофилы</div>
+            <div class="col-6">Базофилы</div>
+            <div class="col-6">Моноциты</div>
+            <div class="col-6">Лимфоциты</div>
+            <div class="col-6">Не проверено</div>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+<script src="{% static 'dataset/js/chart.js' %}"></script>
+{% endblock scripts %}
