@@ -72,7 +72,6 @@ $(document).on('click', 'button.close-btn', function () {
                     $(".drag-n-drop-area").removeClass('d-none');
                 }
             } else {
-                // console.log(response);
                 $(parent).addClass('container-error');
                 $(".preview-container").append(response.html_modal_error)
                 $("#modal_error").modal("show");
