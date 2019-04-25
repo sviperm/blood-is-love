@@ -1,12 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.db.models import Sum
+from django.db.models.aggregates import Count
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views import View
 
 from .forms import UploadedImageForm
-from .models import UploadedImage
+from .models import DataCount, UploadedImage
 from .services import page_navigation
 
 
@@ -16,7 +18,6 @@ def index(request):
 
 class UploadView(LoginRequiredMixin, View):
     login_url = '/admin/login/'
-    # redirect_field_name = '/'
 
     def get(self, request):
         return render(request, template_name='dataset/upload.html')
@@ -65,8 +66,34 @@ class DeleteView(View):
         return JsonResponse(data)
 
 
-def dataset(request):
-    return render(request, template_name='dataset/dataset.html')
+class DatasetView(LoginRequiredMixin, View):
+    login_url = '/admin/login/'
+
+    def get(self, request):
+        total_count = UploadedImage.objects.all().count()
+        neut_count = DataCount.objects.filter(
+            type='neut').aggregate(Sum('count'))['count__sum']
+        eosi_count = DataCount.objects.filter(
+            type='eosi').aggregate(Sum('count'))['count__sum']
+        baso_count = DataCount.objects.filter(
+            type='baso').aggregate(Sum('count'))['count__sum']
+        mono_count = DataCount.objects.filter(
+            type='mono').aggregate(Sum('count'))['count__sum']
+        lymph_count = DataCount.objects.filter(
+            type='lymph').aggregate(Sum('count'))['count__sum']
+        checked = DataCount.objects.values('image').distinct().count()
+        print(checked)
+        return render(request,
+                      template_name='dataset/dataset.html',
+                      context={'total_count': total_count,
+                               'checked': checked,
+                               'unchecked': total_count - checked,
+                               'neut_count': neut_count,
+                               'eosi_count': eosi_count,
+                               'baso_count': baso_count,
+                               'mono_count': mono_count,
+                               'lymph_count': lymph_count,
+                               })
 
 
 class PieChartView(View):
@@ -100,5 +127,80 @@ class DatasetPagesView(LoginRequiredMixin, View):
                       )
 
 
-def single_image(requestm, id):
-    return HttpResponse(f'Single Image - {id}')
+def single_image(request, id):
+    image = get_object_or_404(UploadedImage, pk=id)
+    image_list = UploadedImage.objects.all().order_by('id')
+    for i, img in enumerate(image_list):
+        if (id == img.id):
+            next = ''
+            previous = ''
+            if (i > 0):
+                previous = image_list[i-1].id
+            if (i < len(image_list) - 1):
+                next = image_list[i+1].id
+            break
+    values = [DataCount.objects.filter(image=image, type='neut').aggregate(Sum('count')),
+              DataCount.objects.filter(
+                  image=image, type='eosi').aggregate(Sum('count')),
+              DataCount.objects.filter(
+                  image=image, type='baso').aggregate(Sum('count')),
+              DataCount.objects.filter(
+                  image=image, type='mono').aggregate(Sum('count')),
+              DataCount.objects.filter(image=image, type='lymph').aggregate(Sum('count')), ]
+    print(values)
+    stats = [
+        {
+            'id': 'neut',
+            'name': 'Нейтрофилы',
+            'color': 'red',
+            'value': values[0]['count__sum'],
+        },
+        {
+            'id': 'eosi',
+            'name': 'Эозинофилы',
+            'color': 'blue',
+            'value': values[1]['count__sum'],
+        },
+        {
+            'id': 'baso',
+            'name': 'Базофилы',
+            'color': 'yellow',
+            'value': values[2]['count__sum'],
+        },
+        {
+            'id': 'mono',
+            'name': 'Моноциты',
+            'color': 'green',
+            'value': values[3]['count__sum'],
+        },
+        {
+            'id': 'lymph',
+            'name': 'Лимфоциты',
+            'color': 'violet',
+            'value': values[4]['count__sum'],
+        },
+    ]
+    context = {'image': image,
+               'stats': stats,
+               'next': next,
+               'previous': previous,
+               }
+    return render(request,
+                  template_name='dataset/single_image.html',
+                  context=context)
+
+
+class UpdateCountView(View):
+    def post(self, request):
+        req = request.POST
+        image = UploadedImage.objects.get(pk=req['image_id'])
+        if req['count'] == '0':
+            data = DataCount.objects.get(
+                image=image, type=req['type']).delete()
+        else:
+            data = DataCount.objects.update_or_create(
+                image=image,
+                type=req['type'],
+                defaults={'count': req['count']})
+        response = {'success': True}
+        return JsonResponse(response)

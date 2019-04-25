@@ -24,11 +24,11 @@
             </div>
             <div class="col-md-4 mb-2 px-1">
                 <a href="#" class="btn btn-success btn-lg stat-link-btn" role="button">Проверено -
-                    257</a>
+                    {{ checked }}</a>
             </div>
             <div class="col-md-4 mb-2 px-1">
                 <a href="#" class="btn btn-danger btn-lg stat-link-btn" role="button">Не проверено -
-                    257</a>
+                    {{ unchecked }}</a>
             </div>
         </div>
     </div>
@@ -46,7 +46,13 @@
                         <span class="stat-text">Нейтрофилы</span>
                         <div class="chart-card chart-red"></div>
                     </div>
-                    <span class="stat-text ml-1">- 2491</span>
+
+                    {% if neut_count %}
+                    <span class="stat-text ml-1">- {{ neut_count }}</span>
+                    {% else %}
+                    <span class="stat-text ml-1">- 0</span>
+                    {% endif %}
+
                 </a>
             </div>
             <div class="col-sm-12 col-lg-6 mb-2">
@@ -55,7 +61,12 @@
                         <span class="stat-text">Эозинофилы</span>
                         <div class="chart-card chart-blue"></div>
                     </div>
-                    <span class="stat-text ml-1">- 2491</span>
+                    {% if eosi_count %}
+                    <span class="stat-text ml-1">- {{ eosi_count }}</span>
+                    {% else %}
+                    <span class="stat-text ml-1">- 0</span>
+                    {% endif %}
+
                 </a>
             </div>
             <div class="col-sm-12 col-lg-6 mb-2">
@@ -64,7 +75,12 @@
                         <span class="stat-text">Базофилы</span>
                         <div class="chart-card chart-yellow"></div>
                     </div>
-                    <span class="stat-text ml-1">- 2491</span>
+                    {% if baso_count %}
+                    <span class="stat-text ml-1">- {{ baso_count }}</span>
+                    {% else %}
+                    <span class="stat-text ml-1">- 0</span>
+                    {% endif %}
+
                 </a>
             </div>
             <div class="col-sm-12 col-lg-6 mb-2">
@@ -73,7 +89,12 @@
                         <span class="stat-text">Моноциты</span>
                         <div class="chart-card chart-green"></div>
                     </div>
-                    <span class="stat-text ml-1">- 2491</span>
+                    {% if mono_count %}
+                    <span class="stat-text ml-1">- {{ mono_count }}</span>
+                    {% else %}
+                    <span class="stat-text ml-1">- 0</span>
+                    {% endif %}
+
                 </a>
             </div>
             <div class="col-sm-12 col-lg-6 mb-2">
@@ -82,7 +103,12 @@
                         <span class="stat-text">Лимфоциты</span>
                         <div class="chart-card chart-violet"></div>
                     </div>
-                    <span class="stat-text ml-1">- 2491</span>
+                    {% if lymph_count %}
+                    <span class="stat-text ml-1">- {{ lymph_count }}</span>
+                    {% else %}
+                    <span class="stat-text ml-1">- 0</span>
+                    {% endif %}
+
                 </a>
             </div>
         </div>

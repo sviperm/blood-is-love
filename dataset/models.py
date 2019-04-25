@@ -49,3 +49,32 @@ class UploadedImage(models.Model):
 @receiver(post_delete, sender=UploadedImage)
 def submission_delete(sender, instance, **kwargs):
     instance.file.delete(False)
+
+
+class DataCount(models.Model):
+    """Model definition for DataCount."""
+
+    image = models.ForeignKey('UploadedImage',
+                              on_delete=models.CASCADE)
+    type = models.CharField(max_length=5)
+    count = models.PositiveIntegerField(null=True)
+
+    class Meta:
+        """Meta definition for DataCount."""
+
+        verbose_name = 'DataCount'
+        verbose_name_plural = 'DataCounts'
+
+    def __str__(self):
+        """Unicode representation of DataCount."""
+        return f'img:{self.image.id}, type: {self.type}, count: {self.count}'
+
+    # def save(self):
+    #     """Save method for DataCount."""
+    #     pass
+
+    # def get_absolute_url(self):
+    #     """Return absolute url for DataCount."""
+    #     return ('')
+
+    # TODO: Define custom methods here

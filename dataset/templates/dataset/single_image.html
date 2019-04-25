@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Изображение - №{{ image.id }}</title>
+{% endblock title %}
+
+{% block data-active %}active{% endblock data-active %}
+
+{% block content %}
+<div class="row">
+    <div class="viewport-container col-lg-7 mr-lg-5">
+
+        {% if previous %}
+        <a href="{% url 'dataset:single_image' id=previous %}" class="change-image previous-image"><i
+                class="fas fa-angle-left"></i></a>
+        {% endif %}
+
+        {% if next %}
+        <a href="{% url 'dataset:single_image' id=next %}" class="change-image next-image"><i
+                class="fas fa-angle-right"></i></a>
+        {% endif %}
+
+        <img id="image" class="image-viewport" src="{{ image.file.url }}" alt="" data-id="{{ image.id }}" data-url="{% url 'api_update_count' %}" data-csrf="{{ csrf_token }}">
+    </div>
+    <div class="viewport-container col-lg-4 mt-3 m-lg-0 p-3">
+        <h4>{{ image.title }}</h4>
+        <p>Изображение №{{ image.id }}</p>
+        <!-- Type row -->
+        <div class="stat-viewport-row">
+            {% for stat in stats  %}
+            {% include 'dataset/includes/stat_input.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'dataset/js/download_stat.js' %}"></script>
+{% endblock scripts %}

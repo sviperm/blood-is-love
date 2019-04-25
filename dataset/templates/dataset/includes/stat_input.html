@@ -1,0 +1,26 @@
+<div class="stat-text col-12 col-md-6 col-lg-12 mb-2 px-0">
+    <div class="stat-viewport-row">
+        <!-- Type name -->
+        <div class="col-6 pb-1">
+            <div class="stat-cell-count">
+                <span class="">{{ stat.name }}</span>
+                <div class="chart-card chart-{{ stat.color }}"></div>
+            </div>
+        </div>
+        <!-- Type count -->
+        <div class="col-6">
+            <div class="num-input">
+                <div class="value-button dec">-</div>
+
+                {% if stat.value %}
+                <input id="{{ stat.id }}" class="number" type="number" name="{{ stat.id }}" value="{{ stat.value }}"
+                    readonly />
+                {% else %}
+                <input id="{{ stat.id }}" class="number" type="number" name="{{ stat.id }}" value="0" readonly />
+                {% endif %}
+
+                <div class="value-button inc">+</div>
+            </div>
+        </div>
+    </div>
+</div>
