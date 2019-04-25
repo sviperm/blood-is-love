@@ -80,16 +80,18 @@ class PieChartView(View):
         return JsonResponse(response)
 
 
-class DatasetView(LoginRequiredMixin, View):
+class DatasetPagesView(LoginRequiredMixin, View):
     login_url = '/admin/login/'
 
-    def get(self, request, page_num):
-        image_list = UploadedImage.objects.all().order_by('id')
+    def get(self, request, type, page_num):
+        if type == 'all':
+            image_list = UploadedImage.objects.all().order_by('id')
         paginator = Paginator(image_list, 10)
         page = paginator.get_page(page_num)
         return render(request,
                       template_name='dataset/dataset_pages.html',
                       context={'page_num': page_num,
+                               'type': type,
                                'images': page,
                                'page_nav': page_navigation(
                                    page=page,
