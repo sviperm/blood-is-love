@@ -5,13 +5,15 @@
         {% if page_nav.first %}
         {% if page_nav.previous %}
         <li class="page-item">
-            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.first %}" aria-label="First">
+            <a class="page-link" href="{% url 'dataset:dataset_view' type=type page_num=page_nav.first %}"
+                aria-label="First">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         {% else %}
         <li class="page-item disabled">
-            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.first %}" aria-label="First">
+            <a class="page-link" href="{% url 'dataset:dataset_view' type=type page_num=page_nav.first %}"
+                aria-label="First">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
@@ -21,7 +23,7 @@
         <!-- Go to previous button -->
         {% if page_nav.previous %}
         <li class="page-item">
-            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.previous %}"
+            <a class="page-link" href="{% url 'dataset:dataset_view' type=type page_num=page_nav.previous %}"
                 aria-label="Previous">
                 <span aria-hidden="true">&#x25C2;</span>
             </a>
@@ -39,10 +41,11 @@
 
         {% if page_num == page  %}
         <li class="page-item disabled"><a class="page-link"
-                href="{% url 'dataset:dataset_page' page_num=page %}"><b>{{ page }}</b></a>
+                href="{% url 'dataset:dataset_view' type=type page_num=page %}"><b>{{ page }}</b></a>
         </li>
         {% else %}
-        <li class="page-item"><a class="page-link" href="{% url 'dataset:dataset_page' page_num=page %}">{{ page }}</a>
+        <li class="page-item"><a class="page-link"
+                href="{% url 'dataset:dataset_view' type=type page_num=page %}">{{ page }}</a>
         </li>
         {% endif %}
         {% endfor %}
@@ -50,7 +53,8 @@
         <!-- Go to next button -->
         {% if page_nav.next %}
         <li class="page-item">
-            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.next %}" aria-label="Next">
+            <a class="page-link" href="{% url 'dataset:dataset_view' type=type page_num=page_nav.next %}"
+                aria-label="Next">
                 <span aria-hidden="true">&#x25B8;</span>
             </a>
         </li>
@@ -66,13 +70,15 @@
         {% if page_nav.last %}
         {% if page_nav.next %}
         <li class="page-item">
-            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.last %}" aria-label="Last">
+            <a class="page-link" href="{% url 'dataset:dataset_view' type=type page_num=page_nav.last %}"
+                aria-label="Last">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
         {% else %}
         <li class="page-item disabled">
-            <a class="page-link" href="{% url 'dataset:dataset_page' page_num=page_nav.last %}" aria-label="Last">
+            <a class="page-link" href="{% url 'dataset:dataset_view' type=type page_num=page_nav.last %}"
+                aria-label="Last">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

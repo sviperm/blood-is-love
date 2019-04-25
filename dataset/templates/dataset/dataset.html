@@ -19,7 +19,8 @@
     <div class="col-12 mb-4">
         <div class="row">
             <div class="col-md-4 mb-2 px-1">
-                <a href="#" class="btn btn-primary btn-lg stat-link-btn" role="button">Всего - 257</a>
+                <a href="{% url 'dataset:dataset_view' type='all' page_num=1 %}"
+                    class="btn btn-primary btn-lg stat-link-btn" role="button">Всего - {{ total_count }}</a>
             </div>
             <div class="col-md-4 mb-2 px-1">
                 <a href="#" class="btn btn-success btn-lg stat-link-btn" role="button">Проверено -

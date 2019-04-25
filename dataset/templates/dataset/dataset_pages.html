@@ -10,12 +10,12 @@
 
 {% block content %}
 
-{% include 'dataset\includes\pages_nav.html' %}
+{% include 'dataset/includes/pages_nav.html' %}
 <div class="preview-container round-corners">
     {% for image in images %}
-    {% include 'dataset\includes\dataset_item.html' %}
+    {% include 'dataset/includes/dataset_item.html' %}
     {% endfor %}
 </div>
-{% include 'dataset\includes\pages_nav.html' %}
+{% include 'dataset/includes/pages_nav.html' %}
 
 {% endblock content %}

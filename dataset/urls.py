@@ -1,14 +1,13 @@
 from django.urls import include, path
-from .views import (DatasetView, DeleteView, PieChartView, UploadView,
-                    dataset, single_image)
+from .views import (DatasetPagesView, DeleteView, PieChartView, UploadView,
+                    DatasetView, single_image)
 
 app_name = 'dataset'
 
 urlpatterns = [
-    path('', dataset, name='dataset'),
-    path('page/<int:page_num>', DatasetView.as_view(), name='dataset_page'),
+    path('', DatasetView.as_view(), name='dataset'),
+    path('<str:type>/page/<int:page_num>',
+         DatasetPagesView.as_view(), name='dataset_view'),
     path('upload/', UploadView.as_view(), name='upload'),
-    path('delete_image/', DeleteView.as_view(), name='delete_image'),
     path('image-<int:id>/', single_image, name='single_image'),
-    path('get_pie_chart/', PieChartView.as_view(), name="api_chart"),
 ]
