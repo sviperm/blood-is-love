@@ -22,7 +22,8 @@
                 class="fas fa-angle-right"></i></a>
         {% endif %}
 
-        <img id="image" class="image-viewport" src="{{ image.file.url }}" alt="" data-id="{{ image.id }}" data-url="{% url 'api_update_count' %}" data-csrf="{{ csrf_token }}">
+        <img id="image" class="image-viewport" src="{{ image.file.url }}" alt="" data-id="{{ image.id }}"
+            data-url="{% url 'api_update_count' %}" data-csrf="{{ csrf_token }}">
     </div>
     <div class="viewport-container col-lg-4 mt-3 m-lg-0 p-3">
         <h4>{{ image.title }}</h4>
