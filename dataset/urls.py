@@ -6,8 +6,9 @@ app_name = 'dataset'
 
 urlpatterns = [
     path('', DatasetView.as_view(), name='dataset'),
-    path('<str:type>/page/<int:page_num>',
-         DatasetPagesView.as_view(), name='dataset_view'),
+    path('<str:type>/', include([
+        path('page/<int:page_num >', DatasetPagesView.as_view(), name='dataset_view'),
+        path('image-<int:id>/', single_image, name='single_image'),
+    ])),
     path('upload/', UploadView.as_view(), name='upload'),
-    path('image-<int:id>/', single_image, name='single_image'),
 ]

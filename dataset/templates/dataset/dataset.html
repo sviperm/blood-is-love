@@ -9,7 +9,6 @@
 {% block data-active %}active{% endblock data-active %}
 
 {% block content %}
-
 <div class="preview-container">
     <!-- Title -->
     <div class="col-12 d-flex justify-content-center mb-4">
@@ -20,15 +19,17 @@
         <div class="row">
             <div class="col-md-4 mb-2 px-1">
                 <a href="{% url 'dataset:dataset_view' type='all' page_num=1 %}"
-                    class="btn btn-primary btn-lg stat-link-btn" role="button">Всего - {{ total_count }}</a>
+                    class="btn btn-primary btn-lg stat-link-btn" role="button">Всего - {{ statistics.images.total }}</a>
             </div>
             <div class="col-md-4 mb-2 px-1">
-                <a href="#" class="btn btn-success btn-lg stat-link-btn" role="button">Проверено -
-                    {{ checked }}</a>
+                <a href="{% url 'dataset:dataset_view' type='checked' page_num=1 %}"
+                    class="btn btn-success btn-lg stat-link-btn" role="button">Проверено -
+                    {{ statistics.images.checked }}</a>
             </div>
             <div class="col-md-4 mb-2 px-1">
-                <a href="#" class="btn btn-danger btn-lg stat-link-btn" role="button">Не проверено -
-                    {{ unchecked }}</a>
+                <a href="{% url 'dataset:dataset_view' type='unchecked' page_num=1 %}"
+                    class="btn btn-danger btn-lg stat-link-btn" role="button">Не проверено -
+                    {{ statistics.images.unchecked }}</a>
             </div>
         </div>
     </div>
@@ -36,85 +37,20 @@
     <div class="row">
         <!-- Chart -->
         <div class="chart-container col-8 col-sm-5 col-md-6 col-lg-4">
-            <canvas id="pieChart" width="400" height="400" aria-label="Cells amount chart" role="pie-chart"></canvas>
+            <canvas id="pieChart" width="400" height="400" aria-label="Cells amount chart" role="pie-chart"
+                data-url="{% url 'api_chart' %}"></canvas>
         </div>
         <!-- Types of cells -->
         <div class="row col-sm-7 col-md-6 col-lg-8 m-0">
-            <div class="col-sm-12 col-lg-6 mb-2">
-                <a class="stat-link" href="#">
-                    <div class="stat-cell-count">
-                        <span class="stat-text">Нейтрофилы</span>
-                        <div class="chart-card chart-red"></div>
-                    </div>
-
-                    {% if neut_count %}
-                    <span class="stat-text ml-1">- {{ neut_count }}</span>
-                    {% else %}
-                    <span class="stat-text ml-1">- 0</span>
-                    {% endif %}
-
-                </a>
-            </div>
-            <div class="col-sm-12 col-lg-6 mb-2">
-                <a class="stat-link" href="#">
-                    <div class="stat-cell-count">
-                        <span class="stat-text">Эозинофилы</span>
-                        <div class="chart-card chart-blue"></div>
-                    </div>
-                    {% if eosi_count %}
-                    <span class="stat-text ml-1">- {{ eosi_count }}</span>
-                    {% else %}
-                    <span class="stat-text ml-1">- 0</span>
-                    {% endif %}
-
-                </a>
-            </div>
-            <div class="col-sm-12 col-lg-6 mb-2">
-                <a class="stat-link" href="#">
-                    <div class="stat-cell-count">
-                        <span class="stat-text">Базофилы</span>
-                        <div class="chart-card chart-yellow"></div>
-                    </div>
-                    {% if baso_count %}
-                    <span class="stat-text ml-1">- {{ baso_count }}</span>
-                    {% else %}
-                    <span class="stat-text ml-1">- 0</span>
-                    {% endif %}
-
-                </a>
-            </div>
-            <div class="col-sm-12 col-lg-6 mb-2">
-                <a class="stat-link" href="#">
-                    <div class="stat-cell-count">
-                        <span class="stat-text">Моноциты</span>
-                        <div class="chart-card chart-green"></div>
-                    </div>
-                    {% if mono_count %}
-                    <span class="stat-text ml-1">- {{ mono_count }}</span>
-                    {% else %}
-                    <span class="stat-text ml-1">- 0</span>
-                    {% endif %}
-
-                </a>
-            </div>
-            <div class="col-sm-12 col-lg-6 mb-2">
-                <a class="stat-link" href="#">
-                    <div class="stat-cell-count">
-                        <span class="stat-text">Лимфоциты</span>
-                        <div class="chart-card chart-violet"></div>
-                    </div>
-                    {% if lymph_count %}
-                    <span class="stat-text ml-1">- {{ lymph_count }}</span>
-                    {% else %}
-                    <span class="stat-text ml-1">- 0</span>
-                    {% endif %}
-
-                </a>
-            </div>
+            {% with cell_type=statistics.cells.total %}
+            {% include 'dataset/includes/cell_type_stat.html' %}
+            {% endwith %}
+            {% for cell_type in statistics.cells.types %}
+            {% include 'dataset/includes/cell_type_stat.html' %}
+            {% endfor %}
         </div>
     </div>
 </div>
-
 {% endblock content %}
 
 {% block scripts %}

@@ -387,6 +387,10 @@ a.stat-link:hover {
   border-radius: 15px;
 }
 
+.chart-grey {
+  background-color: rgb(92, 92, 92);
+}
+
 .chart-red {
   background-color: rgba(255, 99, 132, 1);
 }
@@ -403,7 +407,7 @@ a.stat-link:hover {
   background-color: rgba(75, 192, 192, 1);
 }
 
-.chart-violet {
+.chart-purple {
   background-color: rgba(153, 102, 255, 1);
 }
 /* ########################

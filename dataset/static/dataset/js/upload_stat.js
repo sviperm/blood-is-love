@@ -1,5 +1,4 @@
 $(".value-button").on("click", function () {
-
     var $button = $(this);
     var $input = $button.parent().find("input");
     var oldValue = $input.val();
@@ -8,7 +7,6 @@ $(".value-button").on("click", function () {
     var type = $input.attr("id");
     var csrf = $('#image').data("csrf");
     var send = true
-
     if ($button.text() == "+") {
         if (oldValue >= 0) {
             var newVal = parseFloat(oldValue) + 1;
@@ -16,7 +14,6 @@ $(".value-button").on("click", function () {
             newVal = 0;
             send = false
         }
-
     } else {
         if (oldValue > 0) {
             var newVal = parseFloat(oldValue) - 1;
@@ -40,6 +37,4 @@ $(".value-button").on("click", function () {
             }
         });
     }
-    // $input.val(newVal);
-
 });

@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django.urls import reverse
 
 
 class UploadedImage(models.Model):
@@ -17,7 +18,6 @@ class UploadedImage(models.Model):
 
     class Meta:
         """Meta definition for UploadedImage."""
-
         verbose_name = 'UploadedImage'
         verbose_name_plural = 'UploadedImages'
 
@@ -39,10 +39,10 @@ class UploadedImage(models.Model):
 
     def get_absolute_url(self):
         """Return absolute url for UploadedImage."""
-        from django.urls import reverse
-        return reverse('single_image', kwargs={'id': self.id, })
+        return reverse('dataset:single_image', kwargs={'type': 'all', 'id': self.id})
 
     def calc_margin(self):
+        """Calculate margin on y axis when upload image"""
         width = self.file.width
         height = self.file.height
 
@@ -51,6 +51,34 @@ class UploadedImage(models.Model):
             if (x < 155):
                 return str(int((187 - x) / 2))
         return '16'
+
+    def has_previous_next(self, type):
+        if type == 'all':
+            image_list = UploadedImage.objects.all().order_by('id')
+        elif type == 'checked':
+            checked_list = DataCount.objects.all().values_list('image', flat=True).distinct()
+            image_list = UploadedImage.objects.filter(id__in=checked_list)
+        elif type == 'unchecked':
+            total_list = UploadedImage.objects.all().order_by(
+                'id').values_list('id', flat=True)
+            checked_list = DataCount.objects.all().values_list('image', flat=True).distinct()
+            unchecked_list = [x for x in total_list if x not in checked_list]
+            image_list = UploadedImage.objects.filter(id__in=unchecked_list)
+        elif type in ['neut', 'eosi', 'baso', 'mono', 'lymph']:
+            query_list = DataCount.objects.filter(
+                type=type).values_list('image', flat=True).distinct()
+            image_list = UploadedImage.objects.filter(id__in=query_list)
+
+        next_image = ''
+        previous_image = ''
+        for i, image in enumerate(image_list):
+            if (self.id == image.id):
+                if (i > 0):
+                    previous_image = image_list[i - 1]
+                if (i < len(image_list) - 1):
+                    next_image = image_list[i + 1]
+                break
+        return next_image, previous_image
 
 
 @receiver(post_delete, sender=UploadedImage)
@@ -61,8 +89,7 @@ def submission_delete(sender, instance, **kwargs):
 class DataCount(models.Model):
     """Model definition for DataCount."""
 
-    image = models.ForeignKey('UploadedImage',
-                              on_delete=models.CASCADE)
+    image = models.ForeignKey('UploadedImage', on_delete=models.CASCADE)
     type = models.CharField(max_length=5)
     count = models.PositiveIntegerField(null=True)
 
@@ -75,13 +102,3 @@ class DataCount(models.Model):
     def __str__(self):
         """Unicode representation of DataCount."""
         return f'img:{self.image.id}, type: {self.type}, count: {self.count}'
-
-    # def save(self):
-    #     """Save method for DataCount."""
-    #     pass
-
-    # def get_absolute_url(self):
-    #     """Return absolute url for DataCount."""
-    #     return ('')
-
-    # TODO: Define custom methods here

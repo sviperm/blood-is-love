@@ -1,9 +1,7 @@
 <nav aria-label="page navigation" style="display: table;margin: 0 auto;">
     <ul class="pagination">
-
-        <!-- Go tu first button -->
+        <!-- Go-to-first button -->
         {% if page_nav.first %}
-        {% if page_nav.previous %}
         <li class="page-item">
             <a class="page-link" href="{% url 'dataset:dataset_view' type=type page_num=page_nav.first %}"
                 aria-label="First">
@@ -18,9 +16,7 @@
             </a>
         </li>
         {% endif %}
-        {% endif %}
-
-        <!-- Go to previous button -->
+        <!-- Go-to-previous button -->
         {% if page_nav.previous %}
         <li class="page-item">
             <a class="page-link" href="{% url 'dataset:dataset_view' type=type page_num=page_nav.previous %}"
@@ -35,10 +31,8 @@
             </a>
         </li>
         {% endif %}
-
         <!-- Go to page buttons -->
         {% for page in page_nav.pages %}
-
         {% if page_num == page  %}
         <li class="page-item disabled"><a class="page-link"
                 href="{% url 'dataset:dataset_view' type=type page_num=page %}"><b>{{ page }}</b></a>
@@ -49,7 +43,6 @@
         </li>
         {% endif %}
         {% endfor %}
-
         <!-- Go to next button -->
         {% if page_nav.next %}
         <li class="page-item">
@@ -65,10 +58,8 @@
             </a>
         </li>
         {% endif %}
-
         <!-- Go to last button -->
         {% if page_nav.last %}
-        {% if page_nav.next %}
         <li class="page-item">
             <a class="page-link" href="{% url 'dataset:dataset_view' type=type page_num=page_nav.last %}"
                 aria-label="Last">
@@ -83,8 +74,5 @@
             </a>
         </li>
         {% endif %}
-        {% endif %}
-
-
     </ul>
 </nav>

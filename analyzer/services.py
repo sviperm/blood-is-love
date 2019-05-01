@@ -24,8 +24,7 @@ def np_image_to_base64(np_image, format):
     np_image = pil_img.fromarray(np_image)
     img_bytes = BytesIO()
     np_image.save(img_bytes, format='PNG')
-    encoded_string = codecs.encode(
-        img_bytes.getvalue(), 'base64').decode('ascii')
+    encoded_string = codecs.encode(img_bytes.getvalue(), 'base64').decode('ascii')
     return f'data:image/{format};base64, {encoded_string}'
 
 
@@ -44,25 +43,11 @@ def computer_vision(image_path, image_settings):
     if np.size(image, 2) == 4:
         image = np.delete(image, 3, 2)
     eritrocyte_length = int(image_settings['range_picker'])
-    color_picker_h = [
-        int(val) for val in image_settings['color_picker_h'].split(',')
-    ]
-    color_picker_s = [
-        int(val) for val in image_settings['color_picker_s'].split(',')
-    ]
-    color_picker_v = [
-        int(val) for val in image_settings['color_picker_v'].split(',')
-    ]
-    color_lower = np.array(
-        [
-            color_picker_h[0], color_picker_s[0], color_picker_v[0]
-        ]
-    )
-    color_upper = np.array(
-        [
-            color_picker_h[1], color_picker_s[1], color_picker_v[1]
-        ]
-    )
+    color_picker_h = [int(val) for val in image_settings['color_picker_h'].split(',')]
+    color_picker_s = [int(val) for val in image_settings['color_picker_s'].split(',')]
+    color_picker_v = [int(val) for val in image_settings['color_picker_v'].split(',')]
+    color_lower = np.array([color_picker_h[0], color_picker_s[0], color_picker_v[0]])
+    color_upper = np.array([color_picker_h[1], color_picker_s[1], color_picker_v[1]])
     # Detect cells
     draw_image, cropped_images = ComputerVision(
         np_image=image,
@@ -71,15 +56,18 @@ def computer_vision(image_path, image_settings):
         eritrocyte_length=eritrocyte_length).detect_cells()
     # Classify cells
     predictions = cnn_model(is_categorical=False).predict(cropped_images)
-    return {'name': image_path.name,
-            'draw_image': np_image_to_base64(draw_image, format),
-            'predictions': predictions,
-            }
+    return {
+        'name': image_path.name,
+        'draw_image': np_image_to_base64(draw_image, format),
+        'predictions': predictions,
+    }
 
 
 def get_result(images):
-    result = {'types': [],
-              'total': 0, }
+    result = {
+        'types': [],
+        'total': 0,
+    }
     for image in images:
         for prediction in image['predictions']:
             result['total'] += 1
@@ -101,6 +89,5 @@ def get_result(images):
                     'count': 1,
                 })
     for cell_type in result['types']:
-        cell_type['percent'] = "%.2f" % (
-            cell_type['count'] / result['total'] * 100)
+        cell_type['percent'] = "%.2f" % (cell_type['count'] / result['total'] * 100)
     return result

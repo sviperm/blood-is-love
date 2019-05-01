@@ -1,37 +1,26 @@
 $(document).on('mouseover', 'div.item-container', function (e) {
     $(this).addClass('hovered');
 });
-
 $(document).on('mouseout', 'div.item-container', function (e) {
     $(this).removeClass('hovered');
 });
-
 $(function () {
-
     $(".js-upload-photos").click(function () {
         $("#fileupload").click();
     });
-
     $("#fileupload").fileupload({
         dataType: 'json',
         sequentialUploads: true,
-
-        // start: function (e) {
-        //     $("#modal-progress").modal("show");
-        // },
-
         stop: function (e) {
             $(".progress-bar").css({ "width": 0 });
             $(".progress-bar").text("");
         },
-
         progressall: function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             var strProgress = progress + "%";
             $(".progress-bar").css({ "width": strProgress });
             $(".progress-bar").text(strProgress);
         },
-
         done: function (e, data) {
             $(".drag-n-drop-area").addClass('d-none');
             $(".preview-container").removeClass('d-none');
@@ -40,9 +29,7 @@ $(function () {
                 $(".preview-container").append(data.result.html_item)
             }
         }
-
     });
-
 });
 
 $(document).on('hidden.bs.modal', '#modal_error', function () {
@@ -54,7 +41,6 @@ $(document).on('click', 'button.close-btn', function () {
     var url = $(this).data("url");
     var csrf = $(this).data("csrf");
     var parent = $(this).parent('div.item-container');
-
     $.ajax({
         type: 'POST',
         dataType: "json",

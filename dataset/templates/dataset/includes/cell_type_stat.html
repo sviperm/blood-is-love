@@ -1,0 +1,9 @@
+<div class="col-sm-12 col-lg-6 mb-2">
+    <a class="stat-link" href="{{ cell_type.url|default:'#' }}">
+        <div class="stat-cell-count">
+            <span class="stat-text">{{ cell_type.name }}</span>
+            <div class="chart-card chart-{{ cell_type.color }}"></div>
+        </div>
+        <span class="stat-text ml-1">- {{ cell_type.count|default:"0" }}</span>
+    </a>
+</div>

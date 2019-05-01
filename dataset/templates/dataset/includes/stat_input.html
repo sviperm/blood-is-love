@@ -3,7 +3,7 @@
         <!-- Type name -->
         <div class="col-6 pb-1">
             <div class="stat-cell-count">
-                <span class="">{{ stat.name }}</span>
+                <span class="">{{ stat.label }}</span>
                 <div class="chart-card chart-{{ stat.color }}"></div>
             </div>
         </div>
@@ -18,7 +18,6 @@
                 {% else %}
                 <input id="{{ stat.id }}" class="number" type="number" name="{{ stat.id }}" value="0" readonly />
                 {% endif %}
-
                 <div class="value-button inc">+</div>
             </div>
         </div>

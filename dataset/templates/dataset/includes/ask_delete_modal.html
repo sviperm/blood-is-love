@@ -1,0 +1,27 @@
+<!-- Ask delete button -->
+<button id="ask_delete_button" type="button" class="btn btn-danger btn-block mt-2">
+    <i class="far fa-trash-alt"></i> Удалить
+</button>
+<!-- Delete modal -->
+<div id="delete_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete_modal_label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Удалить</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Действительно хотите удалить изображение из базы данных?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                <button id="confirm_delete_button" type="button" class="btn btn-danger"
+                    data-url="{% url 'api_delete' %}" data-pk="{{ image.id }}"
+                    data-csrf="{{ csrf_token }}" data-type={{ type }}>Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>

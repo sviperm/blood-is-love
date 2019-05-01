@@ -41,19 +41,18 @@ def analyzer(request):
             result = services.get_result(images)
             return render(request,
                           template_name='analyzer/analyzer.html',
-                          context={'form': form,
-                                   'result': result,
-                                   'images': images,
-                                   })
+                          context={
+                              'form': form,
+                              'result': result,
+                              'images': images,
+                          })
     return render(request,
                   template_name='analyzer/analyzer.html',
-                  context={'form': form,
-                           'images': None})
+                  context={
+                      'form': form,
+                      'images': None,
+                  })
 
 
 def about(request):
     return HttpResponse('about')
-
-
-def error(request):
-    return render(request, template_name='error.html',)

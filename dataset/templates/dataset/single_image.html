@@ -11,17 +11,14 @@
 {% block content %}
 <div class="row">
     <div class="viewport-container col-lg-7 mr-lg-5">
-
-        {% if previous %}
-        <a href="{% url 'dataset:single_image' id=previous %}" class="change-image previous-image"><i
+        {% if previous_image %}
+        <a href="{% url 'dataset:single_image' type=type id=previous_image.id %}" class="change-image previous-image"><i
                 class="fas fa-angle-left"></i></a>
         {% endif %}
-
-        {% if next %}
-        <a href="{% url 'dataset:single_image' id=next %}" class="change-image next-image"><i
+        {% if next_image %}
+        <a href="{% url 'dataset:single_image' type=type id=next_image.id %}" class="change-image next-image"><i
                 class="fas fa-angle-right"></i></a>
         {% endif %}
-
         <img id="image" class="image-viewport" src="{{ image.file.url }}" alt="" data-id="{{ image.id }}"
             data-url="{% url 'api_update_count' %}" data-csrf="{{ csrf_token }}">
     </div>
@@ -34,11 +31,12 @@
             {% include 'dataset/includes/stat_input.html' %}
             {% endfor %}
         </div>
+        {% include 'dataset/includes/ask_delete_modal.html' %}
     </div>
 </div>
-
 {% endblock content %}
 
 {% block scripts %}
 <script src="{% static 'dataset/js/upload_stat.js' %}"></script>
+<script src="{% static 'dataset/js/delete_image.js' %}"></script>
 {% endblock scripts %}

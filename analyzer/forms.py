@@ -3,10 +3,6 @@ from django.utils.translation import gettext as _
 
 from analyzer.models import AnalyzeImage
 
-# class UploadFileForm(forms.Form):
-#     file = forms.ImageField(label='')
-#     widget = forms.ClearableFileInput(attrs={'multiple': True}))
-
 
 class AnalyzeImageForm(forms.ModelForm):
     file = forms.FileField(widget=forms.FileInput(attrs={

@@ -1,5 +1,5 @@
 <div class="item-container">
-    <a href="{% url 'dataset:single_image' id=image.id %}">
+    <a href="{% url 'dataset:single_image' type=type id=image.id %}">
         <div class="image">
             <img class="image-style" src="{{ image.file.url }}" alt="" style="margin: {{ image.calc_margin }}px 0;">
         </div>
