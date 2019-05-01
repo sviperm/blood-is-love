@@ -26,9 +26,16 @@ class UploadedImage(models.Model):
         return f'{self.id} - {self.title}'
 
     def save(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
-        self.title = kwargs.pop('title')
-        super().save(*args, **kwargs)
+        try:
+            self.user = kwargs.pop('user')
+        except Exception as e:
+            pass
+
+        try:
+            self.title = kwargs.pop('title')
+        except Exception as e:
+            pass
+        super(UploadedImage, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         """Return absolute url for UploadedImage."""
