@@ -41,18 +41,20 @@ class DeleteView(View):
     def post(self, request):
         try:
             image = UploadedImage.objects.get(pk=request.POST['pk'])
-            next_image, previous_image = image.has_previous_next(request.POST['type'])
-            if next_image:
-                redirect_url = next_image.get_absolute_url()
-            elif previous_image:
-                redirect_url = previous_image.get_absolute_url()
-            else:
-                redirect_url = reverse("dataset:dataset")
+            data = {}
+            try:
+                next_image, previous_image = image.has_previous_next(request.POST['type'])
+                if next_image:
+                    redirect_url = next_image.get_absolute_url()
+                elif previous_image:
+                    redirect_url = previous_image.get_absolute_url()
+                else:
+                    redirect_url = reverse("dataset:dataset")
+                data['redirect_url'] = redirect_url
+            except Exception as e:
+                pass
+            data['success'] = True
             image.delete()
-            data = {
-                'success': True,
-                'redirect_url': redirect_url,
-            }
         except UploadedImage.DoesNotExist as ex:
             data = {
                 'success': False,
