@@ -207,46 +207,20 @@ tbody tr:hover{
 }
 
 .preview-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(214px, 1fr));
+  place-items: center center;
   background-color: #fbfbfb;
   border: 2px solid #ebebeb;
-  display: flex;
-  flex-wrap: wrap;
   padding: 1rem;
   margin-bottom: 1.5rem;
-  border-radius: 12px;
 }
 
 .item-container {
-  padding: 0.5rem;
   position: relative;
   width: 214px;
   height: 230px;
   transition-duration: 0.2s;
-  /* border-radius: 10px; */
-}
-
-@media (max-width: 1199px){
-  .item-container {
-    margin: 0 4px;
-  }
-}
-
-@media (max-width: 992px){
-  .item-container {
-    margin: 0 2px;
-  }
-}
-
-@media (max-width: 767px){
-  .item-container {
-    margin: 0 11px;
-  }
-}
-
-@media (max-width: 576px){
-  .item-container {
-    margin: auto;
-  }
 }
 
 .item-container:hover {
