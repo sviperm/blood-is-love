@@ -3,8 +3,10 @@
     "python.linting.pylintEnabled": false,
     "python.linting.pep8Enabled": true,
     "python.linting.pep8Args": [
-        // "--ignore=E501"
+        "--ignore=E501"
     ],
     "python.linting.enabled": true,
-    "python.jediEnabled": true
+    "editor.formatOnSave": false,
+    "python.jediEnabled": false,
+    "kite.showWelcomeNotificationOnStartup": false,
 }
